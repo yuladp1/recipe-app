@@ -36,9 +36,9 @@ export default {
   <div class="container is-fluid recipe-app__container">
     <div class="navbar has-background-grey-lighter columns">
       <div class="navbar-brand">
-        <a class="navbar-item" href="">
-            <img src="./assets/logo.png" />
-         </a>
+        <p class="navbar-item is-size-3" href="">
+            Recipe App
+         </p>
         <a
           role="button"
           class="navbar-burger"
@@ -55,7 +55,7 @@ export default {
         <div class="navbar-end">
           <div class="navbar-item">
             <button
-              class="button is-link is-large is-outlined"
+              class="button is-link is-large is-outlined my-2"
               @click="showmodal = true"
             >
               Add new recipe
@@ -64,16 +64,16 @@ export default {
           <div class="navbar-item">
             <router-link to="/">Home</router-link>
           </div>
-          <div class="navbar-item">
+          <div class="navbar-item mr-3">
             <router-link to="/about">About</router-link>
           </div>
         </div>
       </div>
     </div>
     <div class="columns">
-      <aside class="menu column-3">
-        <p class="menu-label">Find recipe:</p>
-        <ul class="menu-list">
+      <aside class="menu column-3 my-4">
+        <p class="menu-label is-size-5">Find recipe:</p>
+        <ul class="menu-list is-size-5">
           <li><a>appetizers</a></li>
           <li><a>cold platter</a></li>
           <li><a>hot appetizers</a></li>
@@ -85,7 +85,7 @@ export default {
         </ul>
       </aside>
       <div class="column ">
-        <div class="box has-text-centered recipe-app__content">
+        <div class="box has-text-centered my-4 py-6 recipe-app__content">
           <h1 class="title is-2 is-uppercase is-spaced">
             Welcome to the recipe app
           </h1>
@@ -108,7 +108,7 @@ export default {
             <div class="card-content is-italic is-4">
               {{ item.ingredients }}
             </div>
-            <div class="card-content is-5">Serve as: {{ item.kindOfDish }}</div>
+            <div class="card-content is-size-4">Serve as: {{ item.kindOfDish }}</div>
           </div>
         </div>
 
