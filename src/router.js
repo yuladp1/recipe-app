@@ -9,8 +9,8 @@ export default createRouter({
       component: Home,
     },
     {
-      path: '/about',
-      component: () => import('./views/About.vue'),
+      path: '/measures',
+      component: () => import('./views/MeasuresPage.vue'),
     }
     ],
 })
