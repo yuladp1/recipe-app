@@ -12,23 +12,6 @@ export default {
       dish: "",
     };
   },
-  methods: {
-    addNewRecipe() {
-      const newRecipe = {
-        ID: Date.now(),
-        RecipeTitle: this.recipeName,
-        ingredients: this.recipeIngridients,
-        kindOfDish: this.dish,
-      };
-      this.recipes.push(newRecipe);
-      this.showmodal = false;
-    },
-  },
-  async mounted() {
-    const result = await fetch("recipes.json");
-    const data = await result.json();
-    this.recipes = data;
-  },
 };
 </script>
 
