@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>Товар номер {{ productId }}</h1>
+      <h1>Recipe {{ productId }}</h1>
   </div>
 </template>
 
