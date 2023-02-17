@@ -23,22 +23,23 @@
     </div>
   </div>
 
-
+  <ModalRecipe class="modal" :class="{'is-active': taskStore.showmodal}"></ModalRecipe>
 
 </template>
 <script>
+import ModalRecipe from '../components/ModalRecipe.vue';
 import {useTaskStore} from '../stores/recipeStore' 
 export default {
   setup() {
     const taskStore = useTaskStore();
-    return (taskStore);
+    return {taskStore};
 
   },
   name: "Home",
-  data() {
-
+  components: {
+    ModalRecipe,
   },
-  methods: {
+   methods: {
     addNewRecipe() {
       const newRecipe = {
         ID: Date.now(),

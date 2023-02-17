@@ -54,7 +54,7 @@ export default {
   name: "ModalRecipe",
   setup() {
     const taskStore = useTaskStore();
-    return taskStore;
+    return {taskStore};
   },
   created() {},
   data() {
