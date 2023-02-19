@@ -15,8 +15,13 @@
 </template>
 
 <script>
+import {useCatalog} from '../stores/recipeStore'
 export default {
   name: "MenuAside",
+  setup() {
+    const taskStore = useCatalog();
+    return {taskStore};
+  },
 };
 </script>
 

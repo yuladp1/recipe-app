@@ -49,19 +49,27 @@
 </template>
 
 <script>
-import { useTaskStore } from "../stores/recipeStore";
+
+import {useCatalog} from '../stores/recipeStore'
+
 export default {
   name: "ModalRecipe",
   setup() {
-    const taskStore = useTaskStore();
+    const taskStore = useCatalog();
     return {taskStore};
   },
-  created() {},
-  data() {
-    return {};
+  methods: {
+    addNewRecipe() {
+      const newRecipe = {
+        ID: Date.now(),
+        RecipeTitle: this.recipeName,
+        ingredients: this.recipeIngridients,
+        kindOfDish: this.dish,
+      };
+      this.recipes.push(newRecipe);
+      this.showmodal = false;
+    },
   },
-  props: {},
-  methods: {},
 };
 </script>
 

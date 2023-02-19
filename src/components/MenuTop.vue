@@ -37,11 +37,11 @@
   <ModalRecipe class="modal" :class="{'is-active': taskStore.showmodal}"></ModalRecipe>
 </template>
 <script>
-import { useTaskStore } from "../stores/recipeStore";
+import {useCatalog} from '../stores/recipeStore'
 import ModalRecipe from "./ModalRecipe.vue";
 export default {
   setup() {
-    const taskStore = useTaskStore();
+    const taskStore = useCatalog();
     return { taskStore };
   },
   components: {

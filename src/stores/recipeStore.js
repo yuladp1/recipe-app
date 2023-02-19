@@ -1,17 +1,41 @@
 import { defineStore } from "pinia";
-export const useTaskStore = defineStore('taskStore', {
+export const useCatalog = defineStore('taskStore', {
     state: () => {
         return {
-        tasks: [
-            {id:1, title: 'buy some milk', isFav: false},
-            {id:1, title: 'buy some milk', isFav: true}  ],
+            recipes: [],
             showmodal: false,
             showAll: false,
-            recipes: [],
             item: {},
             recipeName: "",
             recipeIngridients: "",
             dish: "",
+            fetching: false
+        }
+    },
+    getters: {
+        isFetching(state) {
+            return state.fetching;
+        },
+        results(state) {
+            return state.recipes;
+          },
+    },
+    actions: {
+        async fetchNewArrivals() {
+            this.fetching = true;
+            const response = await fetch("recipes.json");
+            try {
+                const result = await response.json();
+                this.recipes = result;
+            }
+            catch (err) {
+                this.recipes = [];
+                console.error('Error loading new arrivals:', err);
+                return err;
+              }
+            this.fetching = false;
         }
     }
 })
+
+

@@ -2,13 +2,7 @@
 import MenuTop from "./components/MenuTop.vue";
 import MenuAside from "./components/MenuAside.vue";
 import ModalRecipe from './components/ModalRecipe.vue'
-import {useTaskStore} from './stores/recipeStore' 
 export default {
-  setup() {
-    const taskStore = useTaskStore();
-    return (taskStore);
-
-  },
   name: "App",
   components: {
     MenuTop,

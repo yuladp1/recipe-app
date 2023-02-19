@@ -12,7 +12,7 @@
 
   <div class="columns is-multiline" v-if="taskStore.showAll">
     
-    <div class="card column is-4" v-for="item in recipes" :key="item.ID">
+    <div class="card column is-4" v-for="item in taskStore.recipes" :key="item.ID">
      <router-link to="linkOpen"> <div class="card-header title is-4 has-text-centered">
         {{ item.RecipeTitle }}
       </div></router-link>
@@ -28,10 +28,11 @@
 </template>
 <script>
 import ModalRecipe from '../components/ModalRecipe.vue';
-import {useTaskStore} from '../stores/recipeStore' 
+import {useCatalog} from '../stores/recipeStore'
+import { mapState, mapActions } from 'pinia'
 export default {
   setup() {
-    const taskStore = useTaskStore();
+    const taskStore = useCatalog();
     return {taskStore};
 
   },
@@ -39,28 +40,18 @@ export default {
   components: {
     ModalRecipe,
   },
-   methods: {
-    addNewRecipe() {
-      const newRecipe = {
-        ID: Date.now(),
-        RecipeTitle: this.recipeName,
-        ingredients: this.recipeIngridients,
-        kindOfDish: this.dish,
-      };
-      this.recipes.push(newRecipe);
-      this.showmodal = false;
-    },
-  },
-  async mounted() {
-    const result = await fetch("recipes.json");
-    const data = await result.json();
-    this.recipes = data;
-  },
   computed: {
+    ...mapState(useCatalog, {recipes: 'results'}),
     linkOpen() {
-      return `/products/${this.product.id}`;
+      return `/products/${this.item.id}`;
     },
   },
+  methods: {
+    ...mapActions(useCatalog, ['fetchNewArrivals']),
+  },
+  created() {
+    this.fetchNewArrivals();
+  }
 };
 </script>
 
