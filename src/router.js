@@ -14,7 +14,8 @@ export default createRouter({
     },
     { name: 'RecipeCard', 
     path: '/:id', 
-    component: () => import('./views/RecipeCard.vue')
+    component: () => import('./views/RecipeCard.vue'),
+    props: true
   },
     ],
 })
