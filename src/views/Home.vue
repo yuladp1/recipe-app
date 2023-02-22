@@ -7,62 +7,49 @@
     <button class="button is-primary" @click="taskStore.showmodal = true">
       Add new recipe
     </button>
-    <button
-      class="button is-link"
-      @click="taskStore.showAll = !taskStore.showAll"
-    >
-      Show all
-    </button>
+    <button class="button is-link" @click="taskStore.showAll = !taskStore.showAll">Show all</button>
   </div>
 
   <div class="columns is-multiline" v-if="taskStore.showAll">
-    <div
-      class="card column is-4"
-      v-for="item in taskStore.recipes"
-      :key="item.ID"
-    >
-      <router-link :to="/products/this.item.ID">
-        <div class="card-header title is-4 has-text-centered">
-          {{ item.RecipeTitle }}
-        </div></router-link
-      >
-      <div class="card-content is-italic is-4">
+    
+    <div class="card column is-4" v-for="item in taskStore.recipes" :key="item.ID">
+      <router-link :to="{name: 'RecipeCard', params: { id: item.ID, recipe: item.RecipeTitle } }"> <div class="card-header title is-4 has-text-centered"> 
+         {{ item.RecipeTitle }}
+      </div></router-link>
+           <div class="card-content is-italic is-4">
         {{ item.ingredients }}
       </div>
       <div class="card-content is-size-4">Serve as: {{ item.kindOfDish }}</div>
     </div>
   </div>
 
-  <ModalRecipe
-    class="modal"
-    :class="{ 'is-active': taskStore.showmodal }"
-  ></ModalRecipe>
+  <ModalRecipe class="modal" :class="{'is-active': taskStore.showmodal}"></ModalRecipe>
+
 </template>
 <script>
-import ModalRecipe from "../components/ModalRecipe.vue";
-import { useCatalog } from "../stores/recipeStore";
-import { mapState, mapActions } from "pinia";
+import ModalRecipe from '../components/ModalRecipe.vue';
+import {useCatalog} from '../stores/recipeStore'
+import { mapState, mapActions } from 'pinia'
 export default {
   setup() {
     const taskStore = useCatalog();
-    return { taskStore };
+    return {taskStore};
+
   },
   name: "Home",
   components: {
     ModalRecipe,
   },
   computed: {
-    ...mapState(useCatalog, { recipes: "results" }),
-    linkOpen() {
-      return `/products/${this.item}`;
-    },
+    ...mapState(useCatalog, {recipes: 'results'}),
   },
+
   methods: {
-    ...mapActions(useCatalog, ["fetchNewArrivals"]),
+    ...mapActions(useCatalog, ['fetchNewArrivals']),
   },
   created() {
     this.fetchNewArrivals();
-  },
+  }
 };
 </script>
 

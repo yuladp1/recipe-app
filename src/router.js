@@ -12,10 +12,17 @@ export default createRouter({
       path: '/measures',
       component: () => import('./views/MeasuresPage.vue'),
     },
-    { name: 'RecipeCard', 
-    path: '/:id', 
-    component: () => import('./views/RecipeCard.vue'),
-    props: true
-  },
-    ],
+    {
+      name: 'RecipeCard',
+      props: true,
+      path: '/:id',
+      component: () => import('./views/RecipeCard.vue')
+    },
+    {
+      name: 'DishRecipes',
+      props: true,
+      path: '/:dish',
+      component: () => import('./views/DishRecipes.vue')
+    }
+  ],
 })
