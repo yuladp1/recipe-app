@@ -1,20 +1,20 @@
 <template>
-  <div>
-      <h1>Recipe number: {{ id }}</h1>
-      <div>{{ recipeItem.RecipeTitle }}</div>
-      <div>{{ recipeItem.ingredients }}</div>
-      <div>{{ recipeItem.kindOfDish }}</div>
+  <div class="card column is-4">
+    <h1 class="title is-4 has-text-centered">Recipe number: {{ id }}</h1>
+    <div class="card-header title is-4 has-text-centered">
+      {{ recipeItem.RecipeTitle }}
+    </div>
+    <div class="card-content is-italic is-4">{{ recipeItem.ingredients }}</div>
+    <div card-content is-size-4>{{ recipeItem.kindOfDish }}</div>
   </div>
 </template>
 
 <script>
-import {useCatalog} from '../stores/recipeStore'
-import { mapState, mapActions } from 'pinia'
-export default { 
-   setup() {
+import { useCatalog } from "../stores/recipeStore";
+export default {
+  setup() {
     const taskStore = useCatalog();
-    return {taskStore};
-
+    return { taskStore };
   },
   name: "RecipeCard",
   created() {},
@@ -27,15 +27,15 @@ export default {
     id: [],
     recipe: [],
   },
-  
+
   methods: {
     findRecipe(id) {
-      this.recipeItem =  this.taskStore.recipes.find(c => c.ID == id) 
-    }
+      this.recipeItem = this.taskStore.recipes.find((c) => c.ID == id);
+    },
   },
-   created() {
-        this.findRecipe(this.id);
-  }
+  created() {
+    this.findRecipe(this.id);
+  },
 };
 </script>
 

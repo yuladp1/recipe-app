@@ -49,14 +49,13 @@
 </template>
 
 <script>
-
-import {useCatalog} from '../stores/recipeStore'
+import { useCatalog } from "../stores/recipeStore";
 
 export default {
   name: "ModalRecipe",
   setup() {
     const taskStore = useCatalog();
-    return {taskStore};
+    return { taskStore };
   },
   methods: {
     addNewRecipe() {
@@ -66,8 +65,8 @@ export default {
         ingredients: this.recipeIngridients,
         kindOfDish: this.dish,
       };
-      this.recipes.push(newRecipe);
-      this.showmodal = false;
+      this.taskStore.recipes.push(newRecipe);
+      this.taskStore.showmodal = false;
     },
   },
 };
