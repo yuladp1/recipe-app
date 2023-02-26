@@ -1,8 +1,10 @@
 <template>
-
-  <div class="navbar columns">
+  <div class="navbar columns py-2 ">
     <div class="navbar-brand">
-      <p class="navbar-item is-size-3" href="">Recipe App</p>
+      <div class = "navbar-item">
+      <router-link to="/" class="title is-size-3 recipe__header-content">Recipe App</router-link>
+      </div>
+      <div class = "navbar-item">
       <a
         role="button"
         class="navbar-burger"
@@ -14,7 +16,8 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div class="navbar-burger"></div>
+    </div>
+   <!-- <div class="navbar-burger"></div> -->
     <div class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item">
@@ -49,3 +52,8 @@ export default {
     }
 };
 </script>
+<style>
+.recipe__header-content {
+  line-height: 100%;
+}
+</style>

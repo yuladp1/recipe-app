@@ -1,12 +1,14 @@
 <template>
-  <div class="card column is-4">
-    <h1 class="title is-4 has-text-centered">Recipe number: {{ id }}</h1>
-    <div class="card-header title is-4 has-text-centered">
+  <div class ="container columns is-multiline ">
+  <div class="card column has-text-centered">
+    <div class="column card-header subtitle is-full py-3">Recipe number: {{ id }}</div>
+    <h1 class="column card-header title is-full py-3" >
       {{ recipeItem.RecipeTitle }}
-    </div>
+    </h1>
     <div class="card-content is-italic is-4">{{ recipeItem.ingredients }}</div>
-    <div card-content is-size-4>{{ recipeItem.kindOfDish }}</div>
+    <div class = "card-content is-size-4 has-text-weight-semibold">Serve as: {{ recipeItem.kindOfDish }}</div>
   </div>
+</div>
 </template>
 
 <script>

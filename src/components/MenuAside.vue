@@ -1,13 +1,12 @@
 <template>
-  <aside class="menu column-3 my-4">
-    <p class="menu-label is-size-5">Find recipe:</p>
-    <ul class="menu-list is-size-5">
+  <aside class="menu py-0 has-text-weight-semibold ">
+    <p class="menu-label is-size-5 py-0">Find recipes:</p>
+    <ul class="menu-list is-size-6 ">
       <div v-for="item in taskStore.recipes" :key="item.ID">
         <router-link
           :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
-          :itemprop="item"
         >
-          <li>{{ item.kindOfDish }}</li>
+          <li>- {{ item.kindOfDish }}</li>
         </router-link>
       </div>
     </ul>
