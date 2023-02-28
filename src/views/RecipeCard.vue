@@ -6,7 +6,11 @@
       {{ recipeItem.RecipeTitle }}
     </h1>
     <div class="card-content is-italic is-4">{{ recipeItem.ingredients }}</div>
+    <router-link
+          :to="{ name: 'DishRecipes', params: { dish: recipeItem.kindOfDish } }"
+        >
     <div class = "card-content is-size-4 has-text-weight-semibold">Serve as: {{ recipeItem.kindOfDish }}</div>
+  </router-link>
   </div>
 </div>
 </template>

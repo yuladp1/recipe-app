@@ -19,7 +19,7 @@ export default {
         <MenuTop></MenuTop>
       </div>
       <div class="column columns is-mobile is-full">
-        <div class = "column is-narrow py-0">
+        <div class = "column is-narrow py-0 is-hidden-touch">
           <MenuAside></MenuAside>
         </div>
         <div class="column">

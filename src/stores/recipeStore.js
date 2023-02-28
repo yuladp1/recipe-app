@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 export const useCatalog = defineStore('taskStore', {
     state: () => {
         return {
+            showDropMenu: false,
             recipes: [],
             showmodal: false,
             showAll: false,

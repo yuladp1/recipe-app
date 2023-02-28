@@ -31,7 +31,7 @@
         <router-link
           :to="{
             name: 'RecipeCard',
-            params: { id: item.ID, recipe: item.RecipeTitle },
+            params: { id: item.ID},
           }"
         >
           <div class="card-header title is-4 py-3 ">
@@ -41,9 +41,13 @@
         <div class="card-content is-italic is-4">
           {{ item.ingredients }}
         </div>
+        <router-link
+          :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
+        >
         <div class="card-content is-size-5 has-text-weight-semibold">
           Serve as: {{ item.kindOfDish }}
         </div>
+</router-link>
       </div>
     </div>
     </div>
