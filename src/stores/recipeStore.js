@@ -16,6 +16,7 @@ export const useCatalog = defineStore('recipesStore', {
             recipesShowOnClick: [],
             startPoint: '',
             endPoint: '',
+            temp: []
         }
     },
     getters: {

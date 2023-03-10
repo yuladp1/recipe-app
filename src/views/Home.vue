@@ -129,9 +129,7 @@ import { mapState, mapActions } from "pinia";
 export default {
   setup() {
     const recipesStore = useCatalog();
-    return { recipesStore
-  ,
-    };
+    return { recipesStore };
   },
   name: "Home",
   components: {
@@ -144,22 +142,32 @@ export default {
   methods: {
     ...mapActions(useCatalog, ["fetchNewArrivals"]),
 
-    showItems(page){
-    this.recipesStore.recipesStoreLength = this.recipesStore.recipes.length;
-    console.log(this.recipesStore.recipesStoreLength);
+    showItems(page) {
+      this.recipesStore.recipesStoreLength = this.recipesStore.recipes.length;
+      console.log(this.recipesStore.recipesStoreLength);
 
-    this.recipesStore.startPoint=((page-1)*this.recipesStore.resultsPerPage)-1,
-    console.log(this.recipesStore.startPoint),
-    this.recipesStore.endPoint = this.recipesStore.startPoint+2,
-    console.log(this.recipesStore.endPoint),
-    this.recipesStore.recipesShowOnClick.push(this.recipesStore(i))
+      this.recipesStore.startPoint = (page - 1) * (this.recipesStore.resultsPerPage - 1),
+        console.log(this.recipesStore.startPoint),
+      this.recipesStore.endPoint = this.recipesStore.startPoint + 2,
+        console.log(this.recipesStore.endPoint);
+      for (
+        let i = this.recipesStore.startPoint;
+        i <= this.recipesStore.endPoint;
+        i++
+      ) {
+        this.recipesStore.temp = this.recipesStore.recipes[i];
+        console.log(this.recipesStore.temp);
+        console.log(i),
+        this.recipesStore.recipesShowOnClick.push(temp);
+        
+      }
+
+      console.log(this.recipesStore.recipesShowOnClick);
     },
-
   },
 
   created() {
     this.fetchNewArrivals();
-
   },
 };
 </script>
