@@ -29,3 +29,10 @@ export default {
     </div>
   </div>
 </template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+* {
+  font-family: 'Inconsolata', monospace;
+}
+</style>

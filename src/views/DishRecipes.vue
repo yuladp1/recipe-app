@@ -29,8 +29,8 @@
 import { useCatalog } from "../stores/recipeStore";
 export default {
   setup() {
-    const taskStore = useCatalog();
-    return { taskStore };
+    const recipesStore = useCatalog();
+    return { recipesStore };
   },
   name: "DishRecipes",
   props: {
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
      findDishes() {
-      this.arrayRecipes = this.taskStore.recipes.filter(
+      this.arrayRecipes = this.recipesStore.recipes.filter(
         (item) => item.kindOfDish == this.dish
       )
      },

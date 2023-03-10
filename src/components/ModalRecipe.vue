@@ -7,7 +7,7 @@
         <button
           class="delete"
           aria-label="close"
-          @click="taskStore.showmodal = false"
+          @click="recipesStore.showmodal = false"
         ></button>
       </header>
       <section class="modal-card-body">
@@ -40,7 +40,7 @@
         <button class="button is-success" @click="addNewRecipe">
           Save changes
         </button>
-        <button class="button" @click="taskStore.showmodal = false">
+        <button class="button" @click="recipesStore.showmodal = false">
           Cancel
         </button>
       </footer>
@@ -54,8 +54,8 @@ import { useCatalog } from "../stores/recipeStore";
 export default {
   name: "ModalRecipe",
   setup() {
-    const taskStore = useCatalog();
-    return { taskStore };
+    const recipesStore = useCatalog();
+    return { recipesStore };
   },
   methods: {
     addNewRecipe() {
@@ -65,8 +65,8 @@ export default {
         ingredients: this.recipeIngridients,
         kindOfDish: this.dish,
       };
-      this.taskStore.recipes.push(newRecipe);
-      this.taskStore.showmodal = false;
+      this.recipesStore.recipes.push(newRecipe);
+      this.recipesStore.showmodal = false;
     },
   },
 };
