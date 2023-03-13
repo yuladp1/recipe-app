@@ -75,9 +75,6 @@ export default {
 };
 </script>
 <style>
-.navbar {
-
-}
 .recipe__header-content {
   line-height: 100%;
 }

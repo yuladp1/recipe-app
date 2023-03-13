@@ -67,6 +67,7 @@ export default {
       };
       this.recipesStore.recipes.push(newRecipe);
       this.recipesStore.showmodal = false;
+      this.recipesStore.calculateAmountPages();
     },
   },
 };

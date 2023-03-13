@@ -1,9 +1,7 @@
 <template>
   <div class="columns is-multiline has-text-centered px-0 mx-0">
     <div class="column is-full box py-6 px-4 recipe-app__content">
-      <h1 class="title is-2 is-uppercase is-spaced">
-        Welcome to the recipe app
-      </h1>
+      <h1 class="title is-2 is-uppercase is-spaced">Welcome to the recipe app</h1>
       <h2 class="subtitle is-3">
         This app will help you save your favorite recipes fast
       </h2>
@@ -13,22 +11,14 @@
       >
         Add new recipe
       </button>
-      <button
-        class="button is-large is-link m-2"
-        @click="recipesStore.showAll = !recipesStore.showAll"
-      >
-        Show all
-      </button>
+      <button class="button is-large is-link m-2" @click="recipesStore.showItems(1)">Show all</button>
     </div>
 
-    <div
-      class="column is-full box has-background-success"
-      v-if="recipesStore.showAll"
-    >
+    <div class="column is-full box has-background-success" v-if="recipesStore.showAll">
       <div class="columns is-multiline px-3 py-3">
         <div
           class="card column is-one-third my-3"
-          v-for="item in recipesStore.recipes"
+          v-for="item in recipesStore.temp"
           :key="item.ID"
         >
           <router-link
@@ -37,9 +27,7 @@
               params: { id: item.ID },
             }"
           >
-            <div
-              class="card-header title is-4 px-3 py-3 is-shadowless has-text-link"
-            >
+            <div class="card-header title is-4 px-3 py-3 is-shadowless has-text-link">
               {{ item.RecipeTitle }}
             </div></router-link
           >
@@ -48,9 +36,7 @@
           >
             {{ item.ingredients }}
           </div>
-          <router-link
-            :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
-          >
+          <router-link :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }">
             <div class="card-content is-size-5 has-text-weight-semibold">
               Serve as: {{ item.kindOfDish }}
             </div>
@@ -72,48 +58,22 @@
           </div>
         </div>
       </div>
-    </div>
+      <div class="column">
+       
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          <a class="pagination-previous" @click="this.recipesStore.showItems(this.recipesStore.currentPage-1)">Previous</a>
+          <a class="pagination-next" @click="this.recipesStore.showItems(this.recipesStore.currentPage+1)">Next page</a>
 
-    <div class="column">
-      <nav class="pagination" role="navigation" aria-label="pagination">
-        <a class="pagination-previous">Previous</a>
-        <a class="pagination-next">Next page</a>
+          <ul class="pagination-list" v-for="page in recipesStore.arrayOfPages"  :key="page">
+            <li>
+              <a class="pagination-link" aria-label="Goto page {page}" @click="recipesStore.showItems(page)"
+                >{{page}}</a
+              >
+            </li>
+          </ul>
+        </nav>
 
-        <ul class="pagination-list">
-          <li>
-            <a
-              class="pagination-link"
-              aria-label="Goto page 1"
-              @click="showItems(1)"
-              >1</a
-            >
-          </li>
-          <li>
-            <a
-              class="pagination-link"
-              aria-label="Goto page 2"
-              @click="showItems(2)"
-              >2</a
-            >
-          </li>
-          <li>
-            <a
-              class="pagination-link"
-              aria-label="Goto page 3"
-              @click="showItems(3)"
-              >3</a
-            >
-          </li>
-          <li>
-            <span class="pagination-ellipsis">&hellip;</span>
-          </li>
-          <li>
-            <a class="pagination-link" aria-label="Goto page 45"
-              >last page, computed</a
-            >
-          </li>
-        </ul>
-      </nav>
+      </div>
     </div>
 
     <ModalRecipe
@@ -141,34 +101,12 @@ export default {
 
   methods: {
     ...mapActions(useCatalog, ["fetchNewArrivals"]),
-
-    showItems(page) {
-      this.recipesStore.recipesStoreLength = this.recipesStore.recipes.length;
-      console.log(this.recipesStore.recipesStoreLength);
-
-      this.recipesStore.startPoint = (page - 1) * (this.recipesStore.resultsPerPage - 1),
-        console.log(this.recipesStore.startPoint),
-      this.recipesStore.endPoint = this.recipesStore.startPoint + 2,
-        console.log(this.recipesStore.endPoint);
-      for (
-        let i = this.recipesStore.startPoint;
-        i <= this.recipesStore.endPoint;
-        i++
-      ) {
-        this.recipesStore.temp = this.recipesStore.recipes[i];
-        console.log(this.recipesStore.temp);
-        console.log(i),
-        this.recipesStore.recipesShowOnClick.push(temp);
-        
-      }
-
-      console.log(this.recipesStore.recipesShowOnClick);
-    },
   },
 
   created() {
     this.fetchNewArrivals();
-  },
+    this.recipesStore.calculateAmountPages();
+      },
 };
 </script>
 

@@ -15,8 +15,10 @@ export const useCatalog = defineStore('recipesStore', {
             resultsPerPage: '3',
             recipesShowOnClick: [],
             startPoint: '',
-            endPoint: '',
-            temp: []
+            numPages: '',
+            currentPage: '',
+            temp: [],
+            arrayOfPages: [],
         }
     },
     getters: {
@@ -41,7 +43,27 @@ export const useCatalog = defineStore('recipesStore', {
                 return err;
               }
             this.fetching = false;
-        }
+        },
+
+        calculateAmountPages() {
+            // calculate how many pages we need to display
+            this.numPages = Math.ceil( this.recipes.length / 3);
+           // this.recipesStore.arrayOfPages = new Array(this.recipesStore.numPages);
+      
+            this.arrayOfPages = Array.from({length: this.numPages}, (_, index) => index + 1);
+            console.log(this.arrayOfPages);
+          },
+          showItems(page) {
+            this.currentPage = page;
+            this.showAll = true;
+            this.calculateAmountPages();
+            this.startPoint = (page - 1) * this.resultsPerPage;
+            this.temp = this.recipes.slice(
+              this.startPoint,
+              this.startPoint + 3
+              );
+          },
+
     }
 })
 
