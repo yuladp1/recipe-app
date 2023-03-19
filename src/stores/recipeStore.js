@@ -3,6 +3,7 @@ export const useCatalog = defineStore('recipesStore', {
     state: () => {
         return {
             recipes: [],
+            dishes: ["main dishes", "cold platter", "hot appetizers", "starters", "meat", "salads", "soups", "meat"],
             showmodal: false,
             showAll: false,
             item: {},
@@ -10,7 +11,7 @@ export const useCatalog = defineStore('recipesStore', {
             recipeIngridients: "",
             dish: "",
             fetching: false,
-            recipesStoreLength: '', 
+            recipesStoreLength: '',
             start_number: '1',
             resultsPerPage: '3',
             recipesShowOnClick: [],
@@ -27,7 +28,7 @@ export const useCatalog = defineStore('recipesStore', {
         },
         results(state) {
             return state.recipes;
-          },
+        },
     },
     actions: {
         async fetchNewArrivals() {
@@ -41,28 +42,38 @@ export const useCatalog = defineStore('recipesStore', {
                 this.recipes = [];
                 console.error('Error loading new arrivals:', err);
                 return err;
-              }
+            }
             this.fetching = false;
         },
 
         calculateAmountPages() {
             // calculate how many pages we need to display
-            this.numPages = Math.ceil( this.recipes.length / 3);
-           // this.recipesStore.arrayOfPages = new Array(this.recipesStore.numPages);
-      
-            this.arrayOfPages = Array.from({length: this.numPages}, (_, index) => index + 1);
+            this.numPages = Math.ceil(this.recipes.length / 3);
+            // this.recipesStore.arrayOfPages = new Array(this.recipesStore.numPages);
+
+            this.arrayOfPages = Array.from({ length: this.numPages }, (_, index) => index + 1);
             console.log(this.arrayOfPages);
-          },
-          showItems(page) {
+        },
+        showItems(page) {
             this.currentPage = page;
             this.showAll = true;
             this.calculateAmountPages();
             this.startPoint = (page - 1) * this.resultsPerPage;
             this.temp = this.recipes.slice(
-              this.startPoint,
-              this.startPoint + 3
-              );
-          },
+                this.startPoint,
+                this.startPoint + 3
+            );
+        },
+        showPrevious() {
+            if (this.currentPage > 1) {
+                this.showItems(this.currentPage - 1)
+            }
+        },
+        showNext() {
+            if (this.currentPage < this.numPages) {
+                this.showItems(this.currentPage + 1)
+            }
+        },
 
     }
 })

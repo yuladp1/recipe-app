@@ -2,11 +2,11 @@
   <aside class="menu py-0 has-text-weight-semibold ">
     <p class="menu-label is-size-5 py-0">Find recipes:</p>
     <ul class="menu-list is-size-6 ">
-      <div v-for="item in recipesStore.recipes" :key="item.ID">
+      <div v-for="item in recipesStore.dishes" :key="item">
         <router-link
-          :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
+          :to="{ name: 'DishRecipes', params: { dish: item } }"
         >
-          <li>- {{ item.kindOfDish }}</li>
+          <li>- {{ item }}</li>
         </router-link>
       </div>
     </ul>

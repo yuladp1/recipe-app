@@ -11,7 +11,9 @@
       >
         Add new recipe
       </button>
-      <button class="button is-large is-link m-2" @click="recipesStore.showItems(1)">Show all</button>
+      <button class="button is-large is-link m-2" @click="recipesStore.showItems(1)">
+        Show all
+      </button>
     </div>
 
     <div class="column is-full box has-background-success" v-if="recipesStore.showAll">
@@ -58,24 +60,32 @@
           </div>
         </div>
       </div>
-      <div class="column">
-       
-        <nav class="pagination" role="navigation" aria-label="pagination">
-          <a class="pagination-previous" @click="this.recipesStore.showItems(this.recipesStore.currentPage-1)">Previous</a>
-          <a class="pagination-next" @click="this.recipesStore.showItems(this.recipesStore.currentPage+1)">Next page</a>
 
-          <ul class="pagination-list" v-for="page in recipesStore.arrayOfPages"  :key="page">
+    </div>
+    <div class="column" v-if="recipesStore.showAll">
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          <a class="pagination-previous" @click="this.recipesStore.showPrevious()"
+            >Previous</a
+          >
+          <a class="pagination-next" @click="this.recipesStore.showNext()">Next page</a>
+
+          <ul
+            class="pagination-list"
+            v-for="page in recipesStore.arrayOfPages"
+            :key="page"
+          >
             <li>
-              <a class="pagination-link" aria-label="Goto page {page}" @click="recipesStore.showItems(page)"
-                >{{page}}</a
+              <a
+                class="pagination-link"
+                :class="{ 'is-current': page == recipesStore.currentPage }"
+                aria-label="Goto page {page}"
+                @click="recipesStore.showItems(page)"
+                >{{ page }}</a
               >
             </li>
           </ul>
         </nav>
-
       </div>
-    </div>
-
     <ModalRecipe
       class="modal"
       :class="{ 'is-active': recipesStore.showmodal }"
@@ -106,7 +116,7 @@ export default {
   created() {
     this.fetchNewArrivals();
     this.recipesStore.calculateAmountPages();
-      },
+  },
 };
 </script>
 
