@@ -1,7 +1,9 @@
 <template>
   <div class="columns is-multiline has-text-centered px-0 mx-0">
     <div class="column is-full box py-6 px-4 recipe-app__content">
-      <h1 class="title is-2 is-uppercase is-spaced">Welcome to the recipe app</h1>
+      <h1 class="title is-2 is-uppercase is-spaced">
+        Welcome to the recipe app
+      </h1>
       <h2 class="subtitle is-3">
         This app will help you save your favorite recipes fast
       </h2>
@@ -11,12 +13,18 @@
       >
         Add new recipe
       </button>
-      <button class="button is-large is-link m-2" @click="recipesStore.showItems(1)">
+      <button
+        class="button is-large is-link m-2"
+        @click="recipesStore.showItems(1)"
+      >
         Show all
       </button>
     </div>
 
-    <div class="column is-full box has-background-success" v-if="recipesStore.showAll">
+    <div
+      class="column is-full box has-background-success"
+      v-if="recipesStore.showAll"
+    >
       <div class="columns is-multiline px-3 py-3">
         <div
           class="card column is-one-third my-3"
@@ -29,7 +37,9 @@
               params: { id: item.ID },
             }"
           >
-            <div class="card-header title is-4 px-3 py-3 is-shadowless has-text-link">
+            <div
+              class="card-header title is-4 px-3 py-3 is-shadowless has-text-link"
+            >
               {{ item.RecipeTitle }}
             </div></router-link
           >
@@ -38,7 +48,9 @@
           >
             {{ item.ingredients }}
           </div>
-          <router-link :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }">
+          <router-link
+            :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
+          >
             <div class="card-content is-size-5 has-text-weight-semibold">
               Serve as: {{ item.kindOfDish }}
             </div>
@@ -60,32 +72,33 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="column" v-if="recipesStore.showAll">
-        <nav class="pagination" role="navigation" aria-label="pagination">
-          <a class="pagination-previous" @click="this.recipesStore.showPrevious()"
-            >Previous</a
-          >
-          <a class="pagination-next" @click="this.recipesStore.showNext()">Next page</a>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <a class="pagination-previous" @click="this.recipesStore.showPrevious()"
+          >Previous</a
+        >
+        <a class="pagination-next" @click="this.recipesStore.showNext()"
+          >Next page</a
+        >
 
-          <ul
-            class="pagination-list"
-            v-for="page in recipesStore.arrayOfPages"
-            :key="page"
-          >
-            <li>
-              <a
-                class="pagination-link"
-                :class="{ 'is-current': page == recipesStore.currentPage }"
-                aria-label="Goto page {page}"
-                @click="recipesStore.showItems(page)"
-                >{{ page }}</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <ul
+          class="pagination-list"
+          v-for="page in recipesStore.arrayOfPages"
+          :key="page"
+        >
+          <li>
+            <a
+              class="pagination-link"
+              :class="{ 'is-current': page == recipesStore.currentPage }"
+              aria-label="Goto page {page}"
+              @click="recipesStore.showItems(page)"
+              >{{ page }}</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
     <ModalRecipe
       class="modal"
       :class="{ 'is-active': recipesStore.showmodal }"
@@ -113,8 +126,16 @@ export default {
     ...mapActions(useCatalog, ["fetchNewArrivals"]),
   },
 
-  created() {
+  mounted() {
+    var recipesLocal;
     this.fetchNewArrivals();
+    if (localStorage.getItem(recipesLocal) == 0) {
+      localStorage.setItem(
+        "recipesLocal",
+        JSON.stringify(this.recipesStore.recipes)
+      );
+    }
+    this.recipesStore.recipes = JSON.parse(localStorage.getItem(recipesLocal));
     this.recipesStore.calculateAmountPages();
   },
 };

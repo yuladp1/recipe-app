@@ -48,8 +48,9 @@ export const useCatalog = defineStore('recipesStore', {
 
         calculateAmountPages() {
             // calculate how many pages we need to display
-            this.numPages = Math.ceil(this.recipes.length / 3);
-            // this.recipesStore.arrayOfPages = new Array(this.recipesStore.numPages);
+            this.numPages = Math.ceil(JSON.parse(localStorage.getItem("recipesLocal")).length / 3);
+
+
 
             this.arrayOfPages = Array.from({ length: this.numPages }, (_, index) => index + 1);
             console.log(this.arrayOfPages);
@@ -59,6 +60,7 @@ export const useCatalog = defineStore('recipesStore', {
             this.showAll = true;
             this.calculateAmountPages();
             this.startPoint = (page - 1) * this.resultsPerPage;
+            this.recipes = JSON.parse(localStorage.getItem("recipesLocal"));
             this.temp = this.recipes.slice(
                 this.startPoint,
                 this.startPoint + 3

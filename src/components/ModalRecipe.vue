@@ -65,9 +65,16 @@ export default {
         ingredients: this.recipeIngridients,
         kindOfDish: this.dish,
       };
+      this.recipesStore.recipes = JSON.parse(
+        localStorage.getItem("recipesLocal")
+      );
       this.recipesStore.recipes.push(newRecipe);
-      this.recipesStore.showmodal = false;
       this.recipesStore.calculateAmountPages();
+      localStorage.setItem(
+        "recipesLocal",
+        JSON.stringify(this.recipesStore.recipes)
+      );
+      this.recipesStore.showmodal = false;
     },
   },
 };
