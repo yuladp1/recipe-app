@@ -1,8 +1,10 @@
 <template>
   <div class="columns is-multiline has-text-centered px-0 mx-0 home__container">
     <div class="column is-full box py-6 px-4 recipe-app__content">
-      <h1 class="title is-1 is-uppercase is-spaced">Welcome to the recipe app</h1>
-      <h2 class="subtitle is-2">
+      <h1 class="title is-1 is-uppercase is-spaced ">
+        Welcome to the recipe app
+      </h1>
+      <h2 class="subtitle is-2  ">
         This app will help you save your favorite recipes fast
       </h2>
       <button
@@ -12,14 +14,17 @@
         Add new recipe
       </button>
       <button
-        class="button is-large is-link m-2 home__button"
+        class="button is-large is-link m-2 home__button "
         @click="recipesStore.showItems(1)"
       >
         Show all
       </button>
     </div>
 
-    <div class="column is-full box has-background-success" v-if="recipesStore.showAll">
+    <div
+      class="column is-full box has-background-success"
+      v-if="recipesStore.showAll"
+    >
       <div class="columns is-multiline px-3 py-3">
         <div
           class="card column is-one-third my-3"
@@ -43,21 +48,23 @@
           >
             {{ item.ingredients }}
           </div>
-          <router-link :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }">
+          <router-link
+            :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
+          >
             <div class="card-content is-size-5 has-text-weight-semibold">
               Serve as: {{ item.kindOfDish }}
             </div>
           </router-link>
 
           <div class="card-footer">
-            <div class="card-footer-item">
+            <div class="card-footer-item ">
               <router-link
                 :to="{
                   name: 'RecipeCard',
                   params: { id: item.ID },
-                }"
+                }" 
               >
-                <button class="button is-info is-medium card-footer-item home__button">
+                <button class="button is-info is-medium card-footer-item  home__button ">
                   See more...
                 </button>
               </router-link>
@@ -67,17 +74,19 @@
       </div>
     </div>
     <div class="column" v-if="recipesStore.showAll">
-      <nav
-        class="pagination has-text-weight-bold home__pagination"
-        role="navigation"
-        aria-label="pagination"
-      >
+      <nav class="pagination has-text-weight-bold home__pagination" role="navigation" aria-label="pagination">
         <a class="pagination-previous" @click="this.recipesStore.showPrevious()"
           >Previous</a
         >
-        <a class="pagination-next" @click="this.recipesStore.showNext()">Next page</a>
+        <a class="pagination-next" @click="this.recipesStore.showNext()"
+          >Next page</a
+        >
 
-        <ul class="pagination-list" v-for="page in recipesStore.arrayOfPages" :key="page">
+        <ul
+          class="pagination-list"
+          v-for="page in recipesStore.arrayOfPages"
+          :key="page"
+        >
           <li>
             <a
               class="pagination-link"
@@ -99,32 +108,48 @@
 <script>
 import ModalRecipe from "../components/ModalRecipe.vue";
 import { useCatalog } from "../stores/recipeStore";
+import { computed, onMounted } from "vue";
 import { mapState, mapActions } from "pinia";
+
 export default {
-  setup() {
-    const recipesStore = useCatalog();
-    return { recipesStore };
-  },
   name: "Home",
   components: {
     ModalRecipe,
   },
+  setup() {
+    const recipesStore = useCatalog();
+    const recipes = computed(() => recipesStore.results);
+    
+    const fetchNewArrivals = () => {
+      recipesStore.fetchNewArrivals();
+    };
+
+    onMounted(() => {
+      const recipesLocal = localStorage.getItem("recipesLocal");
+      if (!recipesLocal) {
+        localStorage.setItem(
+          "recipesLocal",
+          JSON.stringify(recipes.value)
+        );
+      } else {
+        recipesStore.recipes = JSON.parse(recipesLocal);
+      }
+      recipesStore.calculateAmountPages();
+    });
+
+    return {
+      recipesStore,
+      recipes,
+      fetchNewArrivals,
+    };
+  },
+
   computed: {
     ...mapState(useCatalog, { recipes: "results" }),
   },
 
   methods: {
     ...mapActions(useCatalog, ["fetchNewArrivals"]),
-  },
-
-  mounted() {
-    var recipesLocal;
-    this.fetchNewArrivals();
-    if (localStorage.getItem(recipesLocal) == 0) {
-      localStorage.setItem("recipesLocal", JSON.stringify(this.recipesStore.recipes));
-    }
-    this.recipesStore.recipes = JSON.parse(localStorage.getItem(recipesLocal));
-    this.recipesStore.calculateAmountPages();
   },
 };
 </script>
@@ -143,13 +168,13 @@ export default {
   overflow: hidden;
 }
 .home__button {
-  font-family: "Amatic SC", cursive;
+  font-family: 'Amatic SC', cursive;
   letter-spacing: 2px;
   font-weight: 800;
-}
-.button__see-more > a {
-  width: 100%;
-}
+  }
+  .button__see-more>a {
+    width: 100%;
+  }
 .home__pagination {
   font-size: 22px;
 }

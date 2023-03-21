@@ -50,32 +50,37 @@
 
 <script>
 import { useCatalog } from "../stores/recipeStore";
+import { ref } from "vue";
 
 export default {
   name: "ModalRecipe",
   setup() {
     const recipesStore = useCatalog();
-    return { recipesStore };
-  },
-  methods: {
-    addNewRecipe() {
+    const recipeName = ref("");
+    const recipeIngredients = ref("");
+    const dish = ref("");
+
+    const addNewRecipe = () => {
       const newRecipe = {
         ID: Date.now(),
-        RecipeTitle: this.recipeName,
-        ingredients: this.recipeIngridients,
-        kindOfDish: this.dish,
+        RecipeTitle: recipeName.value,
+        ingredients: recipeIngredients.value,
+        kindOfDish: dish.value,
       };
-      this.recipesStore.recipes = JSON.parse(
-        localStorage.getItem("recipesLocal")
-      );
-      this.recipesStore.recipes.push(newRecipe);
-      this.recipesStore.calculateAmountPages();
-      localStorage.setItem(
-        "recipesLocal",
-        JSON.stringify(this.recipesStore.recipes)
-      );
-      this.recipesStore.showmodal = false;
-    },
+      recipesStore.recipes = JSON.parse(localStorage.getItem("recipesLocal"));
+      recipesStore.recipes.push(newRecipe);
+      recipesStore.calculateAmountPages();
+      localStorage.setItem("recipesLocal", JSON.stringify(recipesStore.recipes));
+      recipesStore.showmodal = false;
+    };
+
+    return {
+      recipesStore,
+      recipeName,
+      recipeIngredients,
+      dish,
+      addNewRecipe,
+    };
   },
 };
 </script>

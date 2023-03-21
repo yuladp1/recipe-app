@@ -19,31 +19,33 @@
 </template>
 
 <script>
+import { computed, onMounted } from "vue";
 import { useCatalog } from "../stores/recipeStore";
-export default {
-  setup() {
-    const recipesStore = useCatalog();
-    return { recipesStore };
-  },
-  name: "RecipeCard",
-  created() {},
-  data() {
-    return {
-      recipeItem: [],
-    };
-  },
-  props: {
-    id: [],
-    recipe: [],
-  },
 
-  methods: {
-    findRecipe(id) {
-      this.recipeItem = this.recipesStore.recipes.find((c) => c.ID == id);
+export default {
+  name: "RecipeCard",
+  props: {
+    id: {
+      type: Array,
+      required: true,
+    },
+    recipe: {
+      type: Array,
+      required: true,
     },
   },
-  created() {
-    this.findRecipe(this.id);
+  setup(props) {
+    const store = useCatalog();
+    const recipeItem = computed(() => store.recipes.find((c) => c.ID === props.id));
+
+    onMounted(() => {
+      // This is the equivalent of the original created() hook
+      // You can add any logic you need to execute after the component is mounted here
+    });
+
+    return {
+      recipeItem,
+    };
   },
 };
 </script>
