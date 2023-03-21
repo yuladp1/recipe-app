@@ -1,9 +1,9 @@
 <template>
-  <div class="navbar columns py-2 is-light is-spaced has-shadow">
+  <div class="navbar columns py-2  is-spaced is-fixed-top">
     <div class="navbar-brand">
       <div class="navbar-item">
-        <router-link to="/" class="title is-size-3 recipe__header-content"
-          >Recipe App</router-link
+        <router-link to="/" class="title is-size-3 "
+          ><span class="recipe__header-content"> Recipe App</span></router-link
         >
       </div>
       <div class="navbar-item is-hidden-desktop">
@@ -47,10 +47,11 @@
       <div class="navbar-end ">
         <div class="navbar-item ">
           <button
-            class="button is-primary is-normal "
+            class="button is-large top-nav__button"
             @click="recipesStore.showmodal = true"
           >
-            Add new recipe
+        Add new recipe
+            
           </button>
         </div>
       </div>
@@ -75,7 +76,21 @@ export default {
 };
 </script>
 <style>
+
+.navbar {
+  height: 120px;
+}
+
 .recipe__header-content {
+  font-family: 'Pacifico', cursive;
+  font-size: 56px;
   line-height: 100%;
+  color: #054b03;;
+
+}
+.top-nav__button {
+  font-family: 'Amatic SC', cursive;
+  letter-spacing: 2px;
+  font-weight: 800;
 }
 </style>

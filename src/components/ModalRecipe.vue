@@ -3,7 +3,7 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">New recipe card</p>
+        <p class="modal-card-title has-text-weight-bold">New recipe card</p>
         <button
           class="delete"
           aria-label="close"
@@ -37,10 +37,10 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" @click="addNewRecipe">
+        <button class="button is-success has-text-weight-bold modal__button" @click="addNewRecipe">
           Save changes
         </button>
-        <button class="button" @click="recipesStore.showmodal = false">
+        <button class="button has-text-weight-bold modal__button" @click="recipesStore.showmodal = false">
           Cancel
         </button>
       </footer>
@@ -80,4 +80,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.modal__button {
+  font-family: "Amatic SC", cursive;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+</style>

@@ -12,6 +12,16 @@
   "resolved" "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.16.17.tgz"
   "version" "0.16.17"
 
+"@jamescoyle/vue-icon@^0.1.2":
+  "integrity" "sha512-KFrImXx5TKIi6iQXlnyLEBl4rNosNKbTeRnr70ucTdUaciVmd9qK9d/pZAaKt1Ob/8xNnX2GMp8LisyHdKtEgw=="
+  "resolved" "https://registry.npmjs.org/@jamescoyle/vue-icon/-/vue-icon-0.1.2.tgz"
+  "version" "0.1.2"
+
+"@mdi/js@^7.2.96":
+  "integrity" "sha512-paR9M9ZT7rKbh2boksNUynuSZMHhqRYnEZOm/KrZTjQ4/FzyhjLHuvw/8XYzP+E7fS4+/Ms/82EN1pl/OFsiIA=="
+  "resolved" "https://registry.npmjs.org/@mdi/js/-/js-7.2.96.tgz"
+  "version" "7.2.96"
+
 "@vitejs/plugin-vue@^4.0.0":
   "integrity" "sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA=="
   "resolved" "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-4.0.0.tgz"

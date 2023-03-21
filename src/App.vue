@@ -2,6 +2,7 @@
 import MenuTop from "./components/MenuTop.vue";
 import MenuAside from "./components/MenuAside.vue";
 import ModalRecipe from "./components/ModalRecipe.vue";
+
 export default {
   name: "App",
   components: {
@@ -32,7 +33,11 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 * {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Amatic SC', cursive;
+ 
 }
 </style>

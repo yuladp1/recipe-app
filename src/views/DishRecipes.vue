@@ -1,5 +1,5 @@
 <template>
-  <div class = "container columns is-multiline" >
+  <div class = "container columns is-multiline container__dish-recipes" >
     <h1 class ="column is-12 subtitle is-5" >Here are the search results for the query '{{ dish }}':</h1>
   <div
     class="card column has-text-centered "
@@ -10,7 +10,7 @@
             name: 'RecipeCard',
             params: { id: item.ID},
           }">
-    <div class="column card-header title is-full py-3">
+    <div class="column card-header title is-size-2 is-full py-3 px-3 is-shadowless">
       {{ item.RecipeTitle }}
     </div>
 </router-link>
@@ -58,4 +58,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.container__dish-recipes {
+  margin-top: 100px;
+}
+</style>

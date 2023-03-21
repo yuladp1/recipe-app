@@ -1,30 +1,25 @@
 <template>
-  <div class="columns is-multiline has-text-centered px-0 mx-0">
+  <div class="columns is-multiline has-text-centered px-0 mx-0 home__container">
     <div class="column is-full box py-6 px-4 recipe-app__content">
-      <h1 class="title is-2 is-uppercase is-spaced">
-        Welcome to the recipe app
-      </h1>
-      <h2 class="subtitle is-3">
+      <h1 class="title is-1 is-uppercase is-spaced">Welcome to the recipe app</h1>
+      <h2 class="subtitle is-2">
         This app will help you save your favorite recipes fast
       </h2>
       <button
-        class="button is-large is-primary m-2"
+        class="button is-large is-primary m-2 home__button"
         @click="recipesStore.showmodal = true"
       >
         Add new recipe
       </button>
       <button
-        class="button is-large is-link m-2"
+        class="button is-large is-link m-2 home__button"
         @click="recipesStore.showItems(1)"
       >
         Show all
       </button>
     </div>
 
-    <div
-      class="column is-full box has-background-success"
-      v-if="recipesStore.showAll"
-    >
+    <div class="column is-full box has-background-success" v-if="recipesStore.showAll">
       <div class="columns is-multiline px-3 py-3">
         <div
           class="card column is-one-third my-3"
@@ -38,19 +33,17 @@
             }"
           >
             <div
-              class="card-header title is-4 px-3 py-3 is-shadowless has-text-link"
+              class="card-header title is-4 px-3 py-3 is-shadowless has-text-link has-text-weight-bold"
             >
               {{ item.RecipeTitle }}
             </div></router-link
           >
           <div
-            class="card-content is-italic is-4 has-text-justified is-shadowless card__recipe-content"
+            class="card-content is-italic is-4 has-text-justified is-shadowless has-text-weight-bold card__recipe-content"
           >
             {{ item.ingredients }}
           </div>
-          <router-link
-            :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
-          >
+          <router-link :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }">
             <div class="card-content is-size-5 has-text-weight-semibold">
               Serve as: {{ item.kindOfDish }}
             </div>
@@ -64,7 +57,7 @@
                   params: { id: item.ID },
                 }"
               >
-                <button class="button is-info is-medium card-footer-item">
+                <button class="button is-info is-medium card-footer-item home__button">
                   See more...
                 </button>
               </router-link>
@@ -74,19 +67,17 @@
       </div>
     </div>
     <div class="column" v-if="recipesStore.showAll">
-      <nav class="pagination" role="navigation" aria-label="pagination">
+      <nav
+        class="pagination has-text-weight-bold home__pagination"
+        role="navigation"
+        aria-label="pagination"
+      >
         <a class="pagination-previous" @click="this.recipesStore.showPrevious()"
           >Previous</a
         >
-        <a class="pagination-next" @click="this.recipesStore.showNext()"
-          >Next page</a
-        >
+        <a class="pagination-next" @click="this.recipesStore.showNext()">Next page</a>
 
-        <ul
-          class="pagination-list"
-          v-for="page in recipesStore.arrayOfPages"
-          :key="page"
-        >
+        <ul class="pagination-list" v-for="page in recipesStore.arrayOfPages" :key="page">
           <li>
             <a
               class="pagination-link"
@@ -130,10 +121,7 @@ export default {
     var recipesLocal;
     this.fetchNewArrivals();
     if (localStorage.getItem(recipesLocal) == 0) {
-      localStorage.setItem(
-        "recipesLocal",
-        JSON.stringify(this.recipesStore.recipes)
-      );
+      localStorage.setItem("recipesLocal", JSON.stringify(this.recipesStore.recipes));
     }
     this.recipesStore.recipes = JSON.parse(localStorage.getItem(recipesLocal));
     this.recipesStore.calculateAmountPages();
@@ -142,6 +130,9 @@ export default {
 </script>
 
 <style scoped>
+.home__container {
+  margin-top: 100px;
+}
 .recipe-app__content {
   background-image: url("../assets/pexels-diana-light-7296683.jpg");
   background-size: cover;
@@ -149,7 +140,17 @@ export default {
 }
 .card__recipe-content {
   max-height: 150px;
-
   overflow: hidden;
+}
+.home__button {
+  font-family: "Amatic SC", cursive;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+.button__see-more > a {
+  width: 100%;
+}
+.home__pagination {
+  font-size: 22px;
 }
 </style>
