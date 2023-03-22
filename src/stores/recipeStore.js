@@ -56,6 +56,7 @@ export const useCatalog = defineStore('recipesStore', {
             console.log(this.arrayOfPages);
         },
         showItems(page) {
+            if (this.showAll) {
             this.currentPage = page;
             this.showAll = true;
             this.calculateAmountPages();
@@ -65,8 +66,9 @@ export const useCatalog = defineStore('recipesStore', {
                 this.startPoint,
                 this.startPoint + 3
             );
+        }
         },
-        showPrevious() {
+         showPrevious() {
             if (this.currentPage > 1) {
                 this.showItems(this.currentPage - 1)
             }

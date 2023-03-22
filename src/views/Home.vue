@@ -15,7 +15,7 @@
       </button>
       <button
         class="button is-large is-link m-2 home__button "
-        @click="recipesStore.showItems(1)"
+        @click="recipesStore.showAll=!recipesStore.showAll"
       >
         Show all
       </button>
@@ -110,6 +110,7 @@ import ModalRecipe from "../components/ModalRecipe.vue";
 import { useCatalog } from "../stores/recipeStore";
 import { computed, onMounted } from "vue";
 import { mapState, mapActions } from "pinia";
+import { watch } from 'vue';
 
 export default {
   name: "Home",
@@ -136,6 +137,11 @@ export default {
       }
       recipesStore.calculateAmountPages();
     });
+    watch(() => recipesStore.showAll, () => {
+  
+    recipesStore.showItems(1);
+  
+});
 
     return {
       recipesStore,

@@ -24,13 +24,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+$menu-item-hover-color: white;
 .aside__container {
    margin-top: 110px;
   letter-spacing: 2px;
   font-weight: 600;
   font-family: 'Pacifico', cursive;
-
 }
 li {
  font-family: 'Pacifico', cursive; 
