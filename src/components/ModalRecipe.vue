@@ -20,7 +20,7 @@
         <textarea
           class="textarea"
           placeholder="Ingredients:"
-          v-model="recipeIngridients"
+          v-model="ingredients"
         ></textarea>
         <div class="select">
           <select v-model="dish">
@@ -37,10 +37,16 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success has-text-weight-bold modal__button" @click="addNewRecipe">
+        <button
+          class="button is-success has-text-weight-bold modal__button"
+          @click="addNewRecipe"
+        >
           Save changes
         </button>
-        <button class="button has-text-weight-bold modal__button" @click="recipesStore.showmodal = false">
+        <button
+          class="button has-text-weight-bold modal__button"
+          @click="recipesStore.showmodal = false"
+        >
           Cancel
         </button>
       </footer>
@@ -51,35 +57,38 @@
 <script>
 import { useCatalog } from "../stores/recipeStore";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "ModalRecipe",
   setup() {
     const recipesStore = useCatalog();
     const recipeName = ref("");
-    const recipeIngredients = ref("");
+    const ingredients = ref("");
     const dish = ref("");
-
+    // const IDRout =ref("");
+    const router = useRouter();
     const addNewRecipe = () => {
       const newRecipe = {
-        ID: Date.now(),
+        ID: Date.now().toString(),
         RecipeTitle: recipeName.value,
-        ingredients: recipeIngredients.value,
+        ingredients: ingredients.value,
         kindOfDish: dish.value,
       };
-      recipesStore.recipes = JSON.parse(localStorage.getItem("recipesLocal"));
-      recipesStore.recipes.push(newRecipe);
+      // IDRout = newRecipe.ID;
+      recipesStore.recipesLocal.push(newRecipe);
       recipesStore.calculateAmountPages();
-      localStorage.setItem("recipesLocal", JSON.stringify(recipesStore.recipes));
       recipesStore.showmodal = false;
+      router.push({ name: "RecipeCard", params: { id: newRecipe.ID } });
     };
 
     return {
-      recipesStore,
       recipeName,
-      recipeIngredients,
+      ingredients,
       dish,
       addNewRecipe,
+      recipesStore,
+      // IDRout,
     };
   },
 };

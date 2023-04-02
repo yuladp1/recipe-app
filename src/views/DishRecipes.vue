@@ -43,7 +43,7 @@ export default {
     const recipesStore = useCatalog();
     const arrayRecipes = reactive([]);
     const findDishes = () => {
-      arrayRecipes.value = recipesStore.recipes.filter(
+      arrayRecipes.value = recipesStore.recipesLocal.filter(
         (item) => item.kindOfDish == props.dish
       );
     };

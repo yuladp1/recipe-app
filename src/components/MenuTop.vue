@@ -1,8 +1,8 @@
 <template>
-  <div class="navbar columns py-2  is-spaced is-fixed-top top__navbar">
+  <div class="navbar columns py-2 is-spaced is-fixed-top top__navbar">
     <div class="navbar-brand">
       <div class="navbar-item">
-        <router-link to="/" class="title is-size-3 "
+        <router-link to="/" class="title is-size-3"
           ><span class="recipe__header-content"> Recipe App</span></router-link
         >
       </div>
@@ -44,14 +44,13 @@
     </div>
 
     <div class="navbar-menu">
-      <div class="navbar-end ">
-        <div class="navbar-item ">
+      <div class="navbar-end">
+        <div class="navbar-item">
           <button
             class="button is-large top-nav__button"
             @click="recipesStore.showmodal = true"
           >
-        Add new recipe
-            
+            Add new recipe
           </button>
         </div>
       </div>
@@ -60,6 +59,7 @@
   <ModalRecipe
     class="modal"
     :class="{ 'is-active': recipesStore.showmodal }"
+    v-if="recipesStore.showmodal"
   ></ModalRecipe>
 </template>
 
@@ -78,10 +78,12 @@ export default {
     onMounted(() => {
       window.addEventListener("scroll", function () {
         var navbar = document.querySelector(".navbar");
-         navbar.classList.toggle("navbar__small", window.scrollY > 0);
-         var recipe__header = document.querySelector(".recipe__header-content");
-         recipe__header.classList.toggle("recipe__header-small", window.scrollY > 0);
-       
+        navbar.classList.toggle("navbar__small", window.scrollY > 0);
+        var recipe__header = document.querySelector(".recipe__header-content");
+        recipe__header.classList.toggle(
+          "recipe__header-small",
+          window.scrollY > 0
+        );
       });
     });
 
@@ -91,7 +93,6 @@ export default {
 </script>
 
 <style>
-
 .navbar {
   height: 120px;
   border-bottom: 1px solid grey;
@@ -99,11 +100,10 @@ export default {
 }
 .navbar__small {
   height: 70px;
-
 }
 
 .recipe__header-content {
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   font-size: 56px;
   line-height: 100%;
   color: #054b03;
@@ -113,7 +113,7 @@ export default {
   font-size: 36px;
 }
 .top-nav__button {
-  font-family: 'Amatic SC', cursive;
+  font-family: "Amatic SC", cursive;
   letter-spacing: 2px;
   font-weight: 800;
 }

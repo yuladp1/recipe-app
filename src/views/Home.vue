@@ -1,10 +1,10 @@
 <template>
   <div class="columns is-multiline has-text-centered px-0 mx-0 home__container">
     <div class="column is-full box py-6 px-4 recipe-app__content">
-      <h1 class="title is-1 is-uppercase is-spaced ">
+      <h1 class="title is-1 is-uppercase is-spaced">
         Welcome to the recipe app
       </h1>
-      <h2 class="subtitle is-2  ">
+      <h2 class="subtitle is-2">
         This app will help you save your favorite recipes fast
       </h2>
       <button
@@ -14,8 +14,8 @@
         Add new recipe
       </button>
       <button
-        class="button is-large is-link m-2 home__button "
-        @click="recipesStore.showAll=!recipesStore.showAll"
+        class="button is-large is-link m-2 home__button"
+        @click="recipesStore.showAll = !recipesStore.showAll"
       >
         Show all
       </button>
@@ -57,14 +57,16 @@
           </router-link>
 
           <div class="card-footer">
-            <div class="card-footer-item ">
+            <div class="card-footer-item">
               <router-link
                 :to="{
                   name: 'RecipeCard',
                   params: { id: item.ID },
-                }" 
+                }"
               >
-                <button class="button is-info is-medium card-footer-item  home__button ">
+                <button
+                  class="button is-info is-medium card-footer-item home__button"
+                >
                   See more...
                 </button>
               </router-link>
@@ -74,7 +76,11 @@
       </div>
     </div>
     <div class="column" v-if="recipesStore.showAll">
-      <nav class="pagination has-text-weight-bold home__pagination" role="navigation" aria-label="pagination">
+      <nav
+        class="pagination has-text-weight-bold home__pagination"
+        role="navigation"
+        aria-label="pagination"
+      >
         <a class="pagination-previous" @click="this.recipesStore.showPrevious()"
           >Previous</a
         >
@@ -110,7 +116,8 @@ import ModalRecipe from "../components/ModalRecipe.vue";
 import { useCatalog } from "../stores/recipeStore";
 import { computed, onMounted } from "vue";
 import { mapState, mapActions } from "pinia";
-import { watch } from 'vue';
+import { watch } from "vue";
+import { useStorage } from "@vueuse/core";
 
 export default {
   name: "Home",
@@ -119,39 +126,35 @@ export default {
   },
   setup() {
     const recipesStore = useCatalog();
-    const recipes = computed(() => recipesStore.results);
-    
+    //  const recipes = computed(() => recipesStore.results);
     const fetchNewArrivals = () => {
       recipesStore.fetchNewArrivals();
     };
 
     onMounted(() => {
-      const recipesLocal = localStorage.getItem("recipesLocal");
-      if (!recipesLocal) {
-        localStorage.setItem(
-          "recipesLocal",
-          JSON.stringify(recipes.value)
-        );
-      } else {
-        recipesStore.recipes = JSON.parse(recipesLocal);
+      if (recipesStore.recipesLocal.length <= 0) {
+        fetchNewArrivals();
       }
-      recipesStore.calculateAmountPages();
+      //  recipesStore.calculateAmountPages();
     });
-    watch(() => recipesStore.showAll, () => {
-  
-    recipesStore.showItems(1);
-  
-});
+
+    watch(
+      () => recipesStore.showAll,
+      () => {
+        recipesStore.showItems(1);
+      }
+    );
 
     return {
       recipesStore,
-      recipes,
+      //  recipes,
       fetchNewArrivals,
+      recipesLocal: computed(() => recipesStore.getAllrecipesLocal),
     };
   },
 
   computed: {
-    ...mapState(useCatalog, { recipes: "results" }),
+    ...mapState(useCatalog, { results: "results" }),
   },
 
   methods: {
@@ -174,13 +177,13 @@ export default {
   overflow: hidden;
 }
 .home__button {
-  font-family: 'Amatic SC', cursive;
+  font-family: "Amatic SC", cursive;
   letter-spacing: 2px;
   font-weight: 800;
-  }
-  .button__see-more>a {
-    width: 100%;
-  }
+}
+.button__see-more > a {
+  width: 100%;
+}
 .home__pagination {
   font-size: 22px;
 }

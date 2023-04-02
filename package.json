@@ -11,10 +11,12 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.2.96",
+    "@vue/composition-api": "^1.7.1",
     "bulma": "^0.9.4",
     "pinia": "^2.0.30",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "@vueuse/core": "^9.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
