@@ -1,5 +1,5 @@
 <template>
-  <div class="columns is-multiline has-text-centered px-0 mx-0 home__container">
+  <div class="columns is-multiline has-text-centered px-0 mx-0">
     <div class="column is-full box py-6 px-4 recipe-app__content">
       <h1 class="title is-1 is-uppercase is-spaced">
         Welcome to the recipe app
@@ -19,6 +19,9 @@
       >
         Show all
       </button>
+      <div class="column is-half m-auto">
+        <RecipesTags></RecipesTags>
+      </div>
     </div>
 
     <div
@@ -117,16 +120,16 @@ import { useCatalog } from "../stores/recipeStore";
 import { computed, onMounted } from "vue";
 import { mapState, mapActions } from "pinia";
 import { watch } from "vue";
-import { useStorage } from "@vueuse/core";
+import RecipesTags from "../components/RecipesTags.vue";
 
 export default {
   name: "Home",
   components: {
     ModalRecipe,
+    RecipesTags,
   },
   setup() {
     const recipesStore = useCatalog();
-    //  const recipes = computed(() => recipesStore.results);
     const fetchNewArrivals = () => {
       recipesStore.fetchNewArrivals();
     };
@@ -135,7 +138,6 @@ export default {
       if (recipesStore.recipesLocal.length <= 0) {
         fetchNewArrivals();
       }
-      //  recipesStore.calculateAmountPages();
     });
 
     watch(
@@ -144,15 +146,12 @@ export default {
         recipesStore.showItems(1);
       }
     );
-
     return {
       recipesStore,
-      //  recipes,
       fetchNewArrivals,
       recipesLocal: computed(() => recipesStore.getAllrecipesLocal),
     };
   },
-
   computed: {
     ...mapState(useCatalog, { results: "results" }),
   },
@@ -164,9 +163,6 @@ export default {
 </script>
 
 <style scoped>
-.home__container {
-  margin-top: 100px;
-}
 .recipe-app__content {
   background-image: url("../assets/pexels-diana-light-7296683.jpg");
   background-size: cover;

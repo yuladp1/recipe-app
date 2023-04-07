@@ -1,14 +1,14 @@
 <script>
 import MenuTop from "./components/MenuTop.vue";
-import MenuAside from "./components/MenuAside.vue";
 import ModalRecipe from "./components/ModalRecipe.vue";
+import RecipesTags from "./components/RecipesTags.vue";
 
 export default {
   name: "App",
   components: {
     MenuTop,
-    MenuAside,
     ModalRecipe,
+    RecipesTags,
   },
 };
 </script>
@@ -16,14 +16,11 @@ export default {
 <template>
   <div class="container is-fluid">
     <div class="columns is-multiline">
-      <div class="column is-full ">
+      <div class="column is-full">
         <MenuTop></MenuTop>
       </div>
       <div class="column columns is-mobile is-full">
-        <div class = "column is-narrow py-0 is-hidden-touch">
-          <MenuAside></MenuAside>
-        </div>
-        <div class="column">
+        <div class="column wrapper__main-part">
           <router-view></router-view>
         </div>
       </div>
@@ -32,12 +29,9 @@ export default {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-* {
-  font-family: 'Amatic SC', cursive;
- 
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+.wrapper__main-part {
+  margin-top: 100px;
 }
 </style>

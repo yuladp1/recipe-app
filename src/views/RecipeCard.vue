@@ -21,14 +21,19 @@
         </div>
       </router-link>
     </div>
+    <div class="column is-8 m-auto">
+      <recipes-tags />
+    </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useCatalog } from "../stores/recipeStore";
+import RecipesTags from "../components/RecipesTags.vue";
 
 export default {
+  components: { RecipesTags },
   name: "RecipeCard",
   props: {
     id: {
@@ -53,11 +58,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .wrapper__recipe {
   background-image: url("../assets/background-recipe.jpg");
   background-size: cover;
   background-position: center center;
-  margin-top: 100px;
 }
 </style>

@@ -23,17 +23,17 @@
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
               <div
-                v-for="item in recipesStore.recipes"
+                v-for="item in recipesStore.dishes"
                 :key="item.ID"
                 class="dropdown-item"
               >
                 <router-link
                   :to="{
                     name: 'DishRecipes',
-                    params: { dish: item.kindOfDish },
+                    params: { dish: item },
                   }"
                 >
-                  <p>- {{ item.kindOfDish }}</p>
+                  <p>- {{ item }}</p>
                 </router-link>
                 <hr class="dropdown-divider" />
               </div>
@@ -95,7 +95,7 @@ export default {
 <style>
 .navbar {
   height: 120px;
-  border-bottom: 1px solid grey;
+
   transition: height 0.3s ease;
 }
 .navbar__small {

@@ -75,7 +75,6 @@ export default {
         ingredients: ingredients.value,
         kindOfDish: dish.value,
       };
-      // IDRout = newRecipe.ID;
       recipesStore.recipesLocal.push(newRecipe);
       recipesStore.calculateAmountPages();
       recipesStore.showmodal = false;
@@ -88,7 +87,6 @@ export default {
       dish,
       addNewRecipe,
       recipesStore,
-      // IDRout,
     };
   },
 };
