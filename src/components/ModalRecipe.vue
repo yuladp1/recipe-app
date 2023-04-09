@@ -66,7 +66,6 @@ export default {
     const recipeName = ref("");
     const ingredients = ref("");
     const dish = ref("");
-    // const IDRout =ref("");
     const router = useRouter();
     const addNewRecipe = () => {
       const newRecipe = {

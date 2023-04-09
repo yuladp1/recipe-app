@@ -12,7 +12,7 @@
     >
       <div
         class="column card-header title is-size-2 is-full py-3 px-3 is-shadowless"
-        on-click="showRecipes"
+        @click="goToRecipeCard(item.ID)"
       >
         {{ item.RecipeTitle }}
       </div>
@@ -31,6 +31,7 @@
 import { computed, onMounted, onUpdated, reactive } from "vue";
 import { useCatalog } from "../stores/recipeStore";
 import RecipesTags from "../components/RecipesTags.vue";
+import { useRouter } from "vue-router";
 export default {
   components: { RecipesTags },
   name: "DishRecipes",
@@ -45,14 +46,16 @@ export default {
         (item) => item.kindOfDish == props.dish
       );
     };
-    const showRecipes = () => {
-      router.push({ name: "RecipeCard", params: { id: item.ID } });
-    };
+    const router = useRouter();
+    const goToRecipeCard = (itemid) => {
+      router.push({ name: "RecipeCard", params: { id: itemid } });
+    }
     onMounted(findDishes);
     onUpdated(findDishes);
     return {
       arrayRecipes: computed(() => arrayRecipes.value),
-      showRecipes,
+      
+      goToRecipeCard,
     };
   },
 };

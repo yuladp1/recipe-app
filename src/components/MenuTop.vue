@@ -1,9 +1,10 @@
 <template>
-  <div class="navbar columns py-2 is-spaced is-fixed-top top__navbar">
+  <div class="navbar columns is-spaced is-fixed-top top__navbar">
     <div class="navbar-brand">
       <div class="navbar-item">
-        <router-link to="/" class="title is-size-3"
-          ><span class="recipe__header-content"> Recipe App</span></router-link
+        <router-link to="/"
+        >
+        <span class="title recipe__header-content"> Recipe App</span></router-link
         >
       </div>
       <div class="navbar-item is-hidden-desktop">
@@ -93,21 +94,12 @@ export default {
 </script>
 
 <style>
-.navbar {
-  height: 120px;
-
-  transition: height 0.3s ease;
-}
 .navbar__small {
   height: 70px;
 }
-
 .recipe__header-content {
   font-family: "Pacifico", cursive;
-  font-size: 56px;
-  line-height: 100%;
   color: #054b03;
-  transition: font-size 0.3s ease;
 }
 .recipe__header-small {
   font-size: 36px;

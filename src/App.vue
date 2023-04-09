@@ -31,6 +31,11 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+.container {
+  background-image: url("./assets/pexels-diana-light-7296683.jpg");
+  background-size: cover;
+  background-position: center center;
+}
 .wrapper__main-part {
   margin-top: 100px;
 }

@@ -1,8 +1,8 @@
 <template>
-  <div class="tags">
+  <div class="tags  has-text-centered">
     <div v-for="item in recipesStore.dishes" :key="item">
       <router-link :to="{ name: 'DishRecipes', params: { dish: item } }">
-        <span class="tag is-large is-rounded">{{ item }}</span>
+        <span class="tag is-large is-rounded mx-3">{{ item }}</span>
       </router-link>
     </div>
   </div>
@@ -19,4 +19,6 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+
+</style>

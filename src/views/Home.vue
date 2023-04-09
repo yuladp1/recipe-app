@@ -1,20 +1,20 @@
 <template>
   <div class="columns is-multiline has-text-centered px-0 mx-0">
-    <div class="column is-full box py-6 px-4 recipe-app__content">
-      <h1 class="title is-1 is-uppercase is-spaced">
+    <div class="column is-full py-6 px-4 recipe-app__content">
+      <h1 class="title is-uppercase is-spaced title__animation title__main-text">
         Welcome to the recipe app
       </h1>
-      <h2 class="subtitle is-2">
+      <h2 class="subtitle is-2 title__animation title__primary-text">
         This app will help you save your favorite recipes fast
       </h2>
       <button
-        class="button is-large is-primary m-2 home__button"
+        class="button is-large is-primary m-2 home__button button__animation "
         @click="recipesStore.showmodal = true"
       >
         Add new recipe
       </button>
       <button
-        class="button is-large is-link m-2 home__button"
+        class="button is-large is-link m-2 home__button button__animation"
         @click="recipesStore.showAll = !recipesStore.showAll"
       >
         Show all
@@ -34,18 +34,12 @@
           v-for="item in recipesStore.temp"
           :key="item.ID"
         >
-          <router-link
-            :to="{
-              name: 'RecipeCard',
-              params: { id: item.ID },
-            }"
+          <div
+            @click="goToRecipeCard(item.ID)"
+            class="card-header title is-4 px-3 py-3 is-shadowless has-text-link has-text-weight-bold"
           >
-            <div
-              class="card-header title is-4 px-3 py-3 is-shadowless has-text-link has-text-weight-bold"
-            >
-              {{ item.RecipeTitle }}
-            </div></router-link
-          >
+            {{ item.RecipeTitle }}
+          </div>
           <div
             class="card-content is-italic is-4 has-text-justified is-shadowless has-text-weight-bold card__recipe-content"
           >
@@ -61,18 +55,12 @@
 
           <div class="card-footer">
             <div class="card-footer-item">
-              <router-link
-                :to="{
-                  name: 'RecipeCard',
-                  params: { id: item.ID },
-                }"
+              <button
+                @click="goToRecipeCard(item.ID)"
+                class="button is-info is-medium card-footer-item home__button"
               >
-                <button
-                  class="button is-info is-medium card-footer-item home__button"
-                >
-                  See more...
-                </button>
-              </router-link>
+                See more...
+              </button>
             </div>
           </div>
         </div>
@@ -121,6 +109,8 @@ import { computed, onMounted } from "vue";
 import { mapState, mapActions } from "pinia";
 import { watch } from "vue";
 import RecipesTags from "../components/RecipesTags.vue";
+import { useRouter } from "vue-router";
+import { gsap } from "gsap";
 
 export default {
   name: "Home",
@@ -133,11 +123,33 @@ export default {
     const fetchNewArrivals = () => {
       recipesStore.fetchNewArrivals();
     };
+    const router = useRouter();
+    const goToRecipeCard = (itemid) => {
+      router.push({ name: "RecipeCard", params: { id: itemid } });
+    };
+    const titleAnimation = () => {
+      gsap.from(".title__animation", {
+        opacity: 0,
+        duration: 3,
+        delay: 0.5,
+      });
+    };
+    const buttonAnimation = () => {
+      gsap.from(".button__animation", {
+        opacity: 0,
+        width: 0,
+        font: 0,
+        duration: 2,
+        delay: 0.5,
+      });
 
+    };
     onMounted(() => {
       if (recipesStore.recipesLocal.length <= 0) {
         fetchNewArrivals();
-      }
+              }
+      titleAnimation();
+      buttonAnimation();
     });
 
     watch(
@@ -150,6 +162,9 @@ export default {
       recipesStore,
       fetchNewArrivals,
       recipesLocal: computed(() => recipesStore.getAllrecipesLocal),
+      goToRecipeCard,
+      titleAnimation,
+      buttonAnimation,
     };
   },
   computed: {
@@ -163,10 +178,18 @@ export default {
 </script>
 
 <style scoped>
-.recipe-app__content {
-  background-image: url("../assets/pexels-diana-light-7296683.jpg");
-  background-size: cover;
-  background-position: center center;
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+.title__main-text {
+  -webkit-text-stroke: 2px black; /* для Safari/Chrome */
+  text-stroke: 2px black; /* для других браузеров */
+  font-family: 'Lilita One', cursive;
+  color: white;
+  font-size: 66px;
+}
+.title__primary-text {
+  font-family: 'Lilita One', cursive;
+  -webkit-text-stroke: 2px black; /* для Safari/Chrome */
+  text-stroke: 2px black; /* для других браузеров */
 }
 .card__recipe-content {
   max-height: 150px;
