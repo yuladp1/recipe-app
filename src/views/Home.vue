@@ -1,20 +1,24 @@
 <template>
   <div class="columns is-multiline has-text-centered px-0 mx-0">
     <div class="column is-full py-6 px-4 recipe-app__content">
-      <h1 class="title is-uppercase is-spaced title__animation title__main-text">
+      <h1
+        class="subtitle is-uppercase is-spaced title__animation title__main-text"
+      >
         Welcome to the recipe app
       </h1>
-      <h2 class="subtitle is-2 title__animation title__primary-text">
-        This app will help you save your favorite recipes fast
+      <h2
+        class="subtitle is-3 is-uppercase title__animation title__primary-text"
+      >
+        save your favorite recipes fast!
       </h2>
       <button
-        class="button is-large is-primary m-2 home__button button__animation "
+        class="button is-medium is-primary m-2 custom__button button__animation"
         @click="recipesStore.showmodal = true"
       >
         Add new recipe
       </button>
       <button
-        class="button is-large is-link m-2 home__button button__animation"
+        class="button is-medium is-link m-2 custom__button button__animation"
         @click="recipesStore.showAll = !recipesStore.showAll"
       >
         Show all
@@ -24,31 +28,31 @@
       </div>
     </div>
 
-    <div
-      class="column is-full box has-background-success"
-      v-if="recipesStore.showAll"
-    >
-      <div class="columns is-multiline px-3 py-3">
+    <div class="column is-full" v-if="recipesStore.showAll">
+      <div class="columns">
         <div
-          class="card column is-one-third my-3"
+          class="card column m-3"
           v-for="item in recipesStore.temp"
           :key="item.ID"
         >
-          <div
-            @click="goToRecipeCard(item.ID)"
-            class="card-header title is-4 px-3 py-3 is-shadowless has-text-link has-text-weight-bold"
-          >
-            {{ item.RecipeTitle }}
+          <div class="card-header is-shadowless">
+            <div
+              @click="goToRecipeCard(item.ID)"
+              class="card-header-title subtitle px-3 py-3 has-text-link"
+            >
+              {{ item.RecipeTitle }}
+            </div>
           </div>
+
           <div
-            class="card-content is-italic is-4 has-text-justified is-shadowless has-text-weight-bold card__recipe-content"
+            class="card-content is-italic is-4 has-text-justified is-shadowless card__recipe-content"
           >
             {{ item.ingredients }}
           </div>
           <router-link
             :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
           >
-            <div class="card-content is-size-5 has-text-weight-semibold">
+            <div class="card-content is-5 has-text-weight-semibold">
               Serve as: {{ item.kindOfDish }}
             </div>
           </router-link>
@@ -57,7 +61,7 @@
             <div class="card-footer-item">
               <button
                 @click="goToRecipeCard(item.ID)"
-                class="button is-info is-medium card-footer-item home__button"
+                class="button is-info is-medium card-footer-item custom__button"
               >
                 See more...
               </button>
@@ -142,12 +146,11 @@ export default {
         duration: 2,
         delay: 0.5,
       });
-
     };
     onMounted(() => {
       if (recipesStore.recipesLocal.length <= 0) {
         fetchNewArrivals();
-              }
+      }
       titleAnimation();
       buttonAnimation();
     });
@@ -178,32 +181,41 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 .title__main-text {
-  -webkit-text-stroke: 2px black; /* для Safari/Chrome */
-  text-stroke: 2px black; /* для других браузеров */
-  font-family: 'Lilita One', cursive;
+  -webkit-text-stroke: 1px black;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+  font-family: "Lilita One", cursive;
   color: white;
   font-size: 66px;
+  padding-top: 100px;
 }
 .title__primary-text {
-  font-family: 'Lilita One', cursive;
-  -webkit-text-stroke: 2px black; /* для Safari/Chrome */
-  text-stroke: 2px black; /* для других браузеров */
+  font-family: "Lilita One", cursive;
+  color: white;
+  -webkit-text-stroke: 1px black;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+    letter-spacing: 2px;
 }
 .card__recipe-content {
   max-height: 150px;
   overflow: hidden;
 }
-.home__button {
+.custom__button {
   font-family: "Amatic SC", cursive;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-weight: 800;
 }
 .button__see-more > a {
   width: 100%;
 }
+.card-header:hover {
+  cursor: pointer;
+}
+
 .home__pagination {
-  font-size: 22px;
+  font-size: 18px;
 }
 </style>

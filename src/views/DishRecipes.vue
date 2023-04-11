@@ -1,27 +1,27 @@
 <template>
-  <div class="container columns is-multiline has-text-centered">
-    <recipes-tags class="is-hidden-touch"> </recipes-tags>
-    <h1 class="column is-12 subtitle is-5">
+  <div class="columns is-multiline has-text-centered __recipes-container">
+    <recipes-tags class="is-hidden-touch mx-auto"> </recipes-tags>
+    <h1 class="column subtitle is-full">
       Here are the search results for the query '{{ dish }}':
     </h1>
 
     <div
-      class="card column has-text-centered is-full my-3"
+      class="card column is-full mb-2"
       v-for="item in arrayRecipes"
       :key="item.ID"
     >
+      <div class="card-header is-shadowless">
+        <div
+          class="card-header-title subtitle subtitle has-text-link py-3 __recipe-header"
+          @click="goToRecipeCard(item.ID)"
+        >
+          {{ item.RecipeTitle }}
+        </div>
+      </div>
       <div
-        class="column card-header title is-size-2 is-full py-3 px-3 is-shadowless"
-        @click="goToRecipeCard(item.ID)"
+        class="card-content is-italic has-text-justified container__dish-ingredients"
       >
-        {{ item.RecipeTitle }}
-      </div>
-
-      <div class="card-content is-italic is-4 container__dish-ingredients">
         {{ item.ingredients }}
-      </div>
-      <div class="card-content is-size-4 has-text-weight-semibold">
-        Serve as: {{ item.kindOfDish }}
       </div>
     </div>
   </div>
@@ -49,12 +49,12 @@ export default {
     const router = useRouter();
     const goToRecipeCard = (itemid) => {
       router.push({ name: "RecipeCard", params: { id: itemid } });
-    }
+    };
     onMounted(findDishes);
     onUpdated(findDishes);
     return {
       arrayRecipes: computed(() => arrayRecipes.value),
-      
+
       goToRecipeCard,
     };
   },
@@ -62,6 +62,12 @@ export default {
 </script>
 
 <style scoped>
+.__recipes-container {
+  margin-top: 100px;
+}
+.__recipe-header:hover {
+  cursor: pointer;
+}
 .container__dish-ingredients {
   max-height: 150px;
   overflow: hidden;

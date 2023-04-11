@@ -1,29 +1,23 @@
 <template>
-  <div
-    class="container columns is-centered is-multiline py-5 has-text-weight-bold wrapper__recipe"
-  >
-    <div class="card column is-8 has-text-centered has-background-white">
-      <h1
-        class="column card-header title is-size-2 is-full py-3 px-3 is-shadowless"
-      >
+  <div class="card has-text-centered has-background-white __card-container">
+    <div class="card-header is-shadowless py-3">
+      <div class="card-header-title subtitle has-text-link">
         {{ recipeItem.RecipeTitle }}
-      </h1>
-      <div
-        class="card-content is-italic is-size-5 has-text-justified is-shadowless"
-      >
-        {{ recipeItem.ingredients }}
       </div>
-      <router-link
-        :to="{ name: 'DishRecipes', params: { dish: recipeItem.kindOfDish } }"
-      >
-        <div class="card-content is-size-5 has-text-weight-semibold">
-          Serve as: {{ recipeItem.kindOfDish }}
-        </div>
-      </router-link>
     </div>
-    <div class="column is-8 m-auto">
-      <recipes-tags />
+    <div class="card-content is-italic has-text-justified">
+      {{ recipeItem.ingredients }}
     </div>
+    <router-link
+      :to="{ name: 'DishRecipes', params: { dish: recipeItem.kindOfDish } }"
+    >
+      <div class="card-content is-5 has-text-weight-semibold has-text-link">
+        serve as: {{ recipeItem.kindOfDish }}
+      </div>
+    </router-link>
+  </div>
+  <div class="column is-8 m-auto">
+    <recipes-tags />
   </div>
 </template>
 
@@ -59,9 +53,7 @@ export default {
 </script>
 
 <style>
-.wrapper__recipe {
-  background-image: url("../assets/background-recipe.jpg");
-  background-size: cover;
-  background-position: center center;
+.__card-container {
+  margin-top: 100px;
 }
 </style>

@@ -14,15 +14,11 @@ export default {
 </script>
 
 <template>
-  <div class="container is-fluid">
+  <div class="container is-fluid __wrapper">
     <div class="columns is-multiline">
-      <div class="column is-full">
-        <MenuTop></MenuTop>
-      </div>
-      <div class="column columns is-mobile is-full">
-        <div class="column wrapper__main-part">
-          <router-view></router-view>
-        </div>
+      <MenuTop></MenuTop>
+      <div class="column is-full wrapper__main-part">
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -31,12 +27,14 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-.container {
+.__wrapper {
   background-image: url("./assets/pexels-diana-light-7296683.jpg");
-  background-size: cover;
+  background-size: 100% auto;
   background-position: center center;
+  background-repeat: repeat-y;
+  background-position: center -400px;
 }
 .wrapper__main-part {
-  margin-top: 100px;
+  height: 100vh;
 }
 </style>
