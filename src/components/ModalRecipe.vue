@@ -23,7 +23,7 @@
           v-model="ingredients"
         ></textarea>
         <div class="select">
-          <select v-model="dish">
+          <select v-model="dish" >
             <option disabled>Please select dish:</option>
             <option>appetizers</option>
             <option>cold platter</option>

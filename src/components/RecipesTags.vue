@@ -39,4 +39,7 @@ export default {
 .tag__animation {
   opacity: 0;
 }
+.tag__animation:hover {
+  cursor: pointer;
+}
 </style>

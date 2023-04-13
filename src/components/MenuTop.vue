@@ -1,45 +1,37 @@
 <template>
   <div class="navbar is-fixed-top top__navbar">
-    <router-link to="/">
-      <div class="navbar-brand recipe__header-content px-3">
-        Recipe App
-      </div></router-link
-    >
-    <div class="navbar-item is-hidden-desktop">
-      <div class="dropdown is-hoverable">
-        <div class="dropdown-trigger">
-          <button
-            class="button"
-            aria-haspopup="true"
-            aria-controls="dropdown-menu"
-          >
-            <span>Let's go to:</span>
-            <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <div
-              v-for="item in recipesStore.dishes"
-              :key="item.ID"
-              class="dropdown-item"
-            >
-              <router-link
-                :to="{
-                  name: 'DishRecipes',
-                  params: { dish: item },
-                }"
+    <div class="navbar-brand level">
+      <router-link to="/">
+        <div class="level-item recipe__header-content px-3 ">
+          Recipe App
+        </div></router-link
+      >
+      <div class="level-item is-hidden-desktop">
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger dropdown__title recipe__header-content">Let's go to:</div>
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              <div
+                v-for="item in recipesStore.dishes"
+                :key="item.ID"
+                class="dropdown-item"
               >
-                <p>- {{ item }}</p>
-              </router-link>
-              <hr class="dropdown-divider" />
+                <router-link
+                  :to="{
+                    name: 'DishRecipes',
+                    params: { dish: item },
+                  }"
+                >
+                  <p>- {{ item }}</p>
+                </router-link>
+                <hr class="dropdown-divider" />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item">
@@ -75,7 +67,7 @@ export default {
     const logoAnimation = () => {
       gsap.from(".recipe__header-content", {
         opacity: 0,
-         duration: 2,
+        duration: 2,
         delay: 0.5,
         x: -200,
       });
@@ -110,6 +102,17 @@ export default {
 }
 .recipe__header-small {
   font-size: 36px;
+}
+.dropdown__title {
+  font-family: "Amatic SC", cursive;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: black;
+   margin-left: auto;
+   font-size: 1.5rem;
+}
+.dropdown__title:hover {
+  cursor: pointer;
 }
 .top-nav__button {
   font-family: "Amatic SC", cursive;
