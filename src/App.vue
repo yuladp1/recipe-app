@@ -27,6 +27,7 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 .__wrapper {
   background-image: url("./assets/pexels-diana-light-7296683.jpg");
   background-size: 100% auto;

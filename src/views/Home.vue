@@ -37,7 +37,7 @@
         >
           <div class="card-header is-shadowless">
             <div
-              @click="goToRecipeCard(item.ID)"
+              @click="recipesStore.goToRecipeCard(item.ID)"
               class="card-header-title subtitle px-3 py-3 has-text-link"
             >
               {{ item.RecipeTitle }}
@@ -49,21 +49,21 @@
           >
             {{ item.ingredients }}
           </div>
-          <router-link
-            :to="{ name: 'DishRecipes', params: { dish: item.kindOfDish } }"
+
+          <div
+            class="card-content is-5 has-text-weight-semibold __serveAs"
+            @click="recipesStore.goToDishCards(item.kindOfDish)"
           >
-            <div class="card-content is-5 has-text-weight-semibold">
-              Serve as: {{ item.kindOfDish }}
-            </div>
-          </router-link>
+            serve as: {{ item.kindOfDish }}
+          </div>
 
           <div class="card-footer">
             <div class="card-footer-item">
               <button
-                @click="goToRecipeCard(item.ID)"
+                @click="recipesStore.goToRecipeCard(item.ID)"
                 class="button is-info is-medium card-footer-item custom__button"
               >
-                See more...
+                see more...
               </button>
             </div>
           </div>
@@ -113,7 +113,6 @@ import { computed, onMounted } from "vue";
 import { mapState, mapActions } from "pinia";
 import { watch } from "vue";
 import RecipesTags from "../components/RecipesTags.vue";
-import { useRouter } from "vue-router";
 import { gsap } from "gsap";
 
 export default {
@@ -126,10 +125,6 @@ export default {
     const recipesStore = useCatalog();
     const fetchNewArrivals = () => {
       recipesStore.fetchNewArrivals();
-    };
-    const router = useRouter();
-    const goToRecipeCard = (itemid) => {
-      router.push({ name: "RecipeCard", params: { id: itemid } });
     };
     const titleAnimation = () => {
       gsap.from(".title__animation", {
@@ -165,7 +160,6 @@ export default {
       recipesStore,
       fetchNewArrivals,
       recipesLocal: computed(() => recipesStore.getAllrecipesLocal),
-      goToRecipeCard,
       titleAnimation,
       buttonAnimation,
     };
@@ -181,23 +175,20 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
-.title__main-text {
+.title__main-text,
+.title__primary-text {
   -webkit-text-stroke: 1px black;
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
   font-family: "Lilita One", cursive;
   color: white;
+}
+.title__main-text {
   font-size: 66px;
   padding-top: 100px;
 }
 .title__primary-text {
-  font-family: "Lilita One", cursive;
-  color: white;
-  -webkit-text-stroke: 1px black;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
-    letter-spacing: 2px;
+  letter-spacing: 2px;
 }
 .card__recipe-content {
   max-height: 150px;
@@ -211,11 +202,13 @@ export default {
 .button__see-more > a {
   width: 100%;
 }
-.card-header:hover {
+.card-header:hover,
+.__serveAs:hover {
   cursor: pointer;
 }
 
 .home__pagination {
-  font-size: 18px;
+  font-family: "Amatic SC", cursive;
+  font-size: 20px;
 }
 </style>

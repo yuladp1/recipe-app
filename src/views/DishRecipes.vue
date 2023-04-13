@@ -1,19 +1,19 @@
 <template>
-  <div class="columns is-multiline has-text-centered __recipes-container">
+  <div class="columns is-multiline has-text-centered is-centered __recipes-container">
     <recipes-tags class="is-hidden-touch mx-auto"> </recipes-tags>
     <h1 class="column subtitle is-full">
       Here are the search results for the query '{{ dish }}':
     </h1>
 
     <div
-      class="card column is-full mb-2"
+      class="card column is-8 mb-2 "
       v-for="item in arrayRecipes"
       :key="item.ID"
     >
       <div class="card-header is-shadowless">
         <div
-          class="card-header-title subtitle subtitle has-text-link py-3 __recipe-header"
-          @click="goToRecipeCard(item.ID)"
+          class="card-header-title subtitle has-text-link py-3 __recipe-header"
+          @click="recipesStore.goToRecipeCard(item.ID)"
         >
           {{ item.RecipeTitle }}
         </div>
@@ -31,7 +31,6 @@
 import { computed, onMounted, onUpdated, reactive } from "vue";
 import { useCatalog } from "../stores/recipeStore";
 import RecipesTags from "../components/RecipesTags.vue";
-import { useRouter } from "vue-router";
 export default {
   components: { RecipesTags },
   name: "DishRecipes",
@@ -46,16 +45,11 @@ export default {
         (item) => item.kindOfDish == props.dish
       );
     };
-    const router = useRouter();
-    const goToRecipeCard = (itemid) => {
-      router.push({ name: "RecipeCard", params: { id: itemid } });
-    };
     onMounted(findDishes);
     onUpdated(findDishes);
     return {
       arrayRecipes: computed(() => arrayRecipes.value),
-
-      goToRecipeCard,
+      recipesStore,
     };
   },
 };

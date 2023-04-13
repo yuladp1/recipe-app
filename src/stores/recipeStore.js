@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useStorage } from '@vueuse/core';
+import { useRouter } from "vue-router";
 export const useCatalog = defineStore('recipesStore', {
     state: () => ({
         recipes: [],
@@ -20,9 +21,9 @@ export const useCatalog = defineStore('recipesStore', {
         currentPage: '',
         temp: [],
         arrayOfPages: [],
-        recipesLocal: new Array(),
-        recipesLocal: useStorage('recipesLocal', [])
-    }),
+        recipesLocal: useStorage('recipesLocal', []),
+        router: useRouter(),
+        }),
     getters: {
         isFetching(state) {
             return state.fetching;
@@ -79,6 +80,12 @@ export const useCatalog = defineStore('recipesStore', {
                 this.showItems(this.currentPage + 1)
             }
         },
+        goToRecipeCard(itemid){
+            this.router.push({ name: "RecipeCard", params: { id: itemid } });
+          },
+        goToDishCards(dishparam) {
+            this.router.push({ name: "DishRecipes", params: { dish: dishparam } });
+          },
 
     }
 })

@@ -64,6 +64,7 @@
 import { useCatalog } from "../stores/recipeStore";
 import ModalRecipe from "./ModalRecipe.vue";
 import { onMounted } from "vue";
+import { gsap } from "gsap";
 
 export default {
   components: {
@@ -71,6 +72,14 @@ export default {
   },
   setup() {
     const recipesStore = useCatalog();
+    const logoAnimation = () => {
+      gsap.from(".recipe__header-content", {
+        opacity: 0,
+         duration: 2,
+        delay: 0.5,
+        x: -200,
+      });
+    };
 
     onMounted(() => {
       window.addEventListener("scroll", function () {
@@ -82,9 +91,10 @@ export default {
           window.scrollY > 0
         );
       });
+      logoAnimation();
     });
 
-    return { recipesStore };
+    return { recipesStore, logoAnimation };
   },
 };
 </script>

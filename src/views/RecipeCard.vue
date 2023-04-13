@@ -1,5 +1,6 @@
 <template>
-  <div class="card has-text-centered has-background-white __card-container">
+  <div class="columns is-multiline is-centered">
+  <div class="card column is-8 has-text-centered has-background-white __card-container">
     <div class="card-header is-shadowless py-3">
       <div class="card-header-title subtitle has-text-link">
         {{ recipeItem.RecipeTitle }}
@@ -16,9 +17,10 @@
       </div>
     </router-link>
   </div>
-  <div class="column is-8 m-auto">
+  <div class="column is-8 ">
     <recipes-tags />
   </div>
+</div>
 </template>
 
 <script>
@@ -32,10 +34,6 @@ export default {
   props: {
     id: {
       type: String,
-      required: true,
-    },
-    recipe: {
-      type: Array,
       required: true,
     },
   },
