@@ -9,13 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@jamescoyle/vue-icon": "^0.1.2",
+    "@mdi/js": "^7.2.96",
+    "@vue/composition-api": "^1.7.1",
+    "@vueuse/core": "^9.1.0",
     "bulma": "^0.9.4",
+    "gsap": "^3.11.5",
     "pinia": "^2.0.30",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "sass": "^1.59.3",
     "vite": "^4.1.0"
   }
 }

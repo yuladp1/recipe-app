@@ -1,31 +1,41 @@
 <script>
 import MenuTop from "./components/MenuTop.vue";
-import MenuAside from "./components/MenuAside.vue";
 import ModalRecipe from "./components/ModalRecipe.vue";
+import RecipesTags from "./components/RecipesTags.vue";
+
 export default {
   name: "App",
   components: {
     MenuTop,
-    MenuAside,
     ModalRecipe,
+    RecipesTags,
   },
 };
 </script>
 
 <template>
-  <div class="container is-fluid">
+  <div class="container is-fluid __wrapper">
     <div class="columns is-multiline">
-      <div class="column is-full ">
-        <MenuTop></MenuTop>
-      </div>
-      <div class="column columns is-mobile is-full">
-        <div class = "column is-narrow py-0 is-hidden-touch">
-          <MenuAside></MenuAside>
-        </div>
-        <div class="column">
-          <router-view></router-view>
-        </div>
+      <MenuTop></MenuTop>
+      <div class="column is-full wrapper__main-part">
+        <router-view></router-view>
       </div>
     </div>
   </div>
 </template>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
+.__wrapper {
+  background-image: url("./assets/pexels-diana-light-7296683.jpg");
+  background-size: 100% auto;
+  background-position: center center;
+  background-repeat: repeat-y;
+  background-position: center -400px;
+}
+.wrapper__main-part {
+  height: 100vh;
+}
+</style>

@@ -3,11 +3,11 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">New recipe card</p>
+        <p class="modal-card-title has-text-weight-bold">New recipe card</p>
         <button
           class="delete"
           aria-label="close"
-          @click="taskStore.showmodal = false"
+          @click="recipesStore.showmodal = false"
         ></button>
       </header>
       <section class="modal-card-body">
@@ -20,10 +20,10 @@
         <textarea
           class="textarea"
           placeholder="Ingredients:"
-          v-model="recipeIngridients"
+          v-model="ingredients"
         ></textarea>
         <div class="select">
-          <select v-model="dish">
+          <select v-model="dish" >
             <option disabled>Please select dish:</option>
             <option>appetizers</option>
             <option>cold platter</option>
@@ -37,10 +37,16 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" @click="addNewRecipe">
+        <button
+          class="button is-success has-text-weight-bold modal__button"
+          @click="addNewRecipe"
+        >
           Save changes
         </button>
-        <button class="button" @click="taskStore.showmodal = false">
+        <button
+          class="button has-text-weight-bold modal__button"
+          @click="recipesStore.showmodal = false"
+        >
           Cancel
         </button>
       </footer>
@@ -50,26 +56,45 @@
 
 <script>
 import { useCatalog } from "../stores/recipeStore";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "ModalRecipe",
   setup() {
-    const taskStore = useCatalog();
-    return { taskStore };
-  },
-  methods: {
-    addNewRecipe() {
+    const recipesStore = useCatalog();
+    const recipeName = ref("");
+    const ingredients = ref("");
+    const dish = ref("");
+    const router = useRouter();
+    const addNewRecipe = () => {
       const newRecipe = {
-        ID: Date.now(),
-        RecipeTitle: this.recipeName,
-        ingredients: this.recipeIngridients,
-        kindOfDish: this.dish,
+        ID: Date.now().toString(),
+        RecipeTitle: recipeName.value,
+        ingredients: ingredients.value,
+        kindOfDish: dish.value,
       };
-      this.taskStore.recipes.push(newRecipe);
-      this.taskStore.showmodal = false;
-    },
+      recipesStore.recipesLocal.push(newRecipe);
+      recipesStore.calculateAmountPages();
+      recipesStore.showmodal = false;
+      router.push({ name: "RecipeCard", params: { id: newRecipe.ID } });
+    };
+
+    return {
+      recipeName,
+      ingredients,
+      dish,
+      addNewRecipe,
+      recipesStore,
+    };
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.modal__button {
+  font-family: "Amatic SC", cursive;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+</style>
